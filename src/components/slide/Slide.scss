@@ -1,0 +1,21 @@
+.slide {
+  display: flex;
+  justify-content: center;
+  padding: 100px 0px;
+
+  .container {
+    width: 1400px;
+    position: relative;
+  }
+
+  // Hide arrows and radio buttons (dots)
+  .carousel-prev,
+  .carousel-next,
+  .carousel-dots {
+    display: none;
+  }
+
+  .carousel-initialized {
+    position: static;
+  }
+}

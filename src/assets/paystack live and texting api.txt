@@ -1,0 +1,17 @@
+API Configuration - Live Mode
+
+Live Secret Key: sk_live_f80913736457ba330beed31c7f130be1cdac2140
+
+Live Public Key: pk_live_f84991843fed56744e6b8453273bc1144cda1ef5
+
+
+
+API Configuration - Test Mode
+
+
+Test Secret Key
+
+sk_test_86aaec026074c5f38449514772c4431d4a2491f4
+
+Test Public Key:
+pk_test_203063db9296f544c38129c2575189d2fd31f438

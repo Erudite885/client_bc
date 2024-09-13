@@ -1,0 +1,140 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #172D3B;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  transition: 0.5s all ease;
+  padding: 10px;
+
+  &.active {
+    background-color: white;
+    color: #172D3B;
+
+    button {
+      background-color: white !important;
+      color: #172D3B !important;
+      border: 1px solid #172D3B !important;
+    }
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+
+
+    .links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-family: "Lato", "Opensans", sans-serif;
+      font-weight: 500;
+
+      @media (max-width: 768px) {
+        display: none; /* Hide links on smaller screens */
+      }
+
+      span {
+        white-space: nowrap;
+      }
+
+      .user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        position: relative;
+
+        img {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        .options {
+          position: absolute;
+          top: 50px;
+          right: 0;
+          padding: 20px;
+          background-color: white;
+          border-radius: 10px;
+          z-index: 999;
+          border: 1px solid lightgrey;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          width: 200px;
+          font-weight: 300;
+          color: gray;
+        }
+      }
+
+      button {
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: 1px solid white;
+        background-color: transparent;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #172D3B;
+          border-color: #172D3B;
+        }
+      }
+    }
+  }
+
+  /* Mobile menu toggle */
+  .mobile-menu-toggle {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: block;
+      cursor: pointer;
+    }
+
+    .icon {
+      font-size: 24px;
+      color: white;
+    }
+  }
+
+  /* Mobile menu */
+  .mobile-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: #172D3B;
+    width: 100%;
+    text-align: center;
+
+    &.open {
+      display: flex;
+    }
+
+    span,
+    .link {
+      padding: 15px;
+      border-bottom: 1px solid #ffffff1a;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 5px;
+
+    .container {
+      padding: 5px;
+      .logo {
+        font-size: 24px;
+      }
+    }
+  }
+}
