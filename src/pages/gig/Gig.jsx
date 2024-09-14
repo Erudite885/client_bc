@@ -101,9 +101,9 @@ function Gig() {
                         <span>{Math.round(data.totalStars / data.starNumber)}</span>
                       </div>
                     )}
-                    <Link to="">
+                    {/* <Link to="">
                       <button>Contact Me</button>
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
                 <div className="box">

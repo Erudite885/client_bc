@@ -10,45 +10,11 @@ import { images, teamMembers } from "../../constants/data";
 
 export function About() {
 
-  // const getImagePosition = (index) => {
-  //   switch (index) {
-  //     case 0:
-  //       return "top-8 left-8";
-  //     case 1:
-  //       return "top-16 right-12";
-  //     case 2:
-  //       return "bottom-20 left-20";
-  //     case 3:
-  //       return "bottom-10 right-24";
-  //     case 4:
-  //       return "top-64 left-40";
-  //     case 5:
-  //       return "top-20 right-40";
-  //     case 6:
-  //       return "bottom-32 left-16";
-  //     case 7:
-  //       return "top-40 right-32";
-  //     case 8:
-  //       return "bottom-56 left-12";
-  //     case 9:
-  //       return "top-56 right-40";
-  //     case 10:
-  //       return "bottom-24 left-16";
-  //     case 11:
-  //       return "top-60 right-32";
-  //     default:
-  //       return "top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2";
-  //   }
-  // };
-
-  // const imageVariants = {
-  //   hidden: { opacity: 0, scale: 0.8 },
-  //   visible: { opacity: 1, scale: 1 },
-  // };
+ 
 
   return (
     <>
-      <section className="min-h-screen w-full flex items-center justify-center relative bg-gradient-to-r from-lightBlue via-midLightBlue to-darkBlue">
+      <section className="min-h-screen w-full flex items-center justify-center relative bg-gradient-to-r from-lightBlue via-midLightBlue">
         <div className="flex flex-col items-center px-8 md:px-32 ">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
