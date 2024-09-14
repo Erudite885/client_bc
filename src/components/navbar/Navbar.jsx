@@ -46,23 +46,9 @@ function Navbar() {
           </Link>
         </div>
         <div className="links">
-          <Link to="/">Home</Link>
-          <Link to="/about">About Us</Link>
-          <Link to="/faq">FAQ</Link>
-          {currentUser ? (
-            <>
-              <Link className="" to="/support">
-                Support
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link className="" to="/contact">
-                Contact
-              </Link>
-            </>
-          )}
-          {!currentUser?.isSeller && <span>Become a Freelancer</span>}
+          {!currentUser && <Link to="/">Home</Link>}
+          {!currentUser && <Link to="/about">About Us</Link>}
+          {!currentUser && <Link to="/register?role=influencer">Become a Content Creator</Link>}
           {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
               <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
@@ -126,6 +112,9 @@ function Navbar() {
                   </Link>
                   <Link className="link" to="/messages">
                     Messages
+                  </Link>
+                  <Link className="link" to="/support">
+                    Support
                   </Link>
                   <Link className="link" onClick={handleLogout}>
                     Logout
@@ -228,7 +217,7 @@ function Navbar() {
               <Link to="/login" className="link">
                 Sign in
               </Link>
-              <Link className="link" to="/register">
+              <Link className="link" to="/get-started">
                 <button>Join</button>
               </Link>
             </>

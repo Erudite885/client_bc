@@ -98,6 +98,11 @@ const Footer = () => {
                     Community
                   </Link>
                 </li>
+                <li>
+                  <Link to="/contact" className="hover:underline">
+                    Contact Us
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
@@ -113,6 +118,7 @@ const Footer = () => {
                     Terms &amp; <br /> Conditions
                   </Link>
                 </li>
+                
               </ul>
             </div>
           </div>
@@ -121,7 +127,7 @@ const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2024{" "}
-            <Link to="https://www.brandcollaborator.com/" className="hover:underline">
+            <Link to="/" className="hover:underline">
               BrandCollaborator™
             </Link>
             . All Rights Reserved.

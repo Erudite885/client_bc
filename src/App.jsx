@@ -21,6 +21,8 @@ import Pay from "./pages/pay/Pay";
 import Success from "./pages/success/Success";
 import { PrivacyPolicy } from "./pages/common/PrivacyPolicy";
 import { FAQ } from "./pages/common/FAQ";
+import { TermsOfService } from "./pages/common/TermsOfService";
+import { GetStarted } from "./pages/common/GetStarted";
 import { Contact } from "./pages/common/Contact";
 import { NotFound } from "./pages/common/NotFound";
 import { Support } from "./pages/common/Support";
@@ -56,6 +58,12 @@ function App() {
         {
           path: "/privacy-policy",
           element: <PrivacyPolicy />,
+        }, {
+          path: "/terms-of-service",
+          element: <TermsOfService />,
+        },{
+          path: "/get-started",
+          element: <GetStarted />,
         },
         {
           path: "/faq",
