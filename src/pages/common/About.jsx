@@ -14,59 +14,9 @@ export function About() {
 
   return (
     <>
-      <section className="min-h-screen w-full flex items-center justify-center relative bg-gradient-to-r from-lightBlue via-midLightBlue">
-        <div className="flex flex-col items-center px-8 md:px-32 ">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl text-left font-bold text-gray-900 mb-6"
-          >
-            At BrandCollaborator
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg text-gray-600 max-w-2xl text-center "
-          >
-            Cupidatat minim id magna ipsum sint dolor qui. Sunt sit in quis cupidatat mollit aute velit. Et labore
-            commodo nulla aliqua proident mollit ullamco exercitation tempor. Sint aliqua anim nulla sunt mollit id
-            pariatur in voluptate cillum. Eu voluptate tempor esse minim amet fugiat veniam occaecat aliqua.
-          </motion.p>
-        </div>
-
-        {/* <motion.div
-          className=""
-          initial="hidden"
-          animate="visible"
-          variants={{
-            visible: {
-              transition: {
-                staggerChildren: 0.3,
-              },
-            },
-          }}
-        >
-          {images.map((image, index) => (
-            <motion.div
-              key={index}
-              variants={imageVariants}
-              transition={{ duration: 0.5 + index * 0.1 }}
-              className={`absolute ${getImagePosition(index)} z-10`}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className={`rounded-full shadow-lg ${image.className} object-cover`}
-              />
-            </motion.div>
-          ))}
-        </motion.div> */}
-      </section>
 
       {/* Section 2: Mission and Stats */}
-      <section className="flex flex-col relative md:flex-row items-center justify-between max-w-6xl mx-auto py-16 px-4 md:px-8">
+      <section className="flex flex-col relative md:flex-row items-center justify-between max-w-6xl mx-auto py-16 px-4 md:px-8 ">
         <div className="absolute top-0 left-0 w-full h-full">
           <img src={cardbg1} alt="Background" className="absolute top-0 left-0 w-auto h-auto" />
           <img src={cardbg2} alt="Background" className="absolute bottom-0 right-0 w-auto h-auto" />
@@ -245,7 +195,7 @@ export function About() {
                 </li>
               </ul>
               <div className="mt-8">
-                <a href="/get-started" className="text-blue-400 hover:text-blue-800 text-lg font-medium">
+                <a href="/get-started" className="text-blue-400 hover:text-blue-800 text-lg font-medium hover:bg-gray-200 rounded p-4">
                   Get Started &rarr;
                 </a>
               </div>
