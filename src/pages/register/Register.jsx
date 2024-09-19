@@ -21,15 +21,21 @@ function Register() {
     role: "brand",
     birthday: "",
     businessName: "",
-    contactName: "",
+    jobTitle: "",
+    country: "",
+    city: "",
     website: "",
     companySize: "",
     industry: "",
     fullName: "",
-    portfolioLinks: "",
+    preferredLanguages: "",
     youtubeLink: "",
     tiktokLink: "",
-    otherLink: "",
+    facebookLink: "",
+    instagramLink: "",
+    twitterLink: "",
+    blogLink: "",
+    primaryPlatforms: [],
   });
 
   useEffect(() => {
@@ -48,38 +54,70 @@ function Register() {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const age = calculateAge(user.birthday);
+  const handleCheckboxChange = useCallback((e) => {
+    const { value, checked } = e.target;
+    setUser((prev) => {
+      const primaryPlatforms = checked
+        ? [...prev.primaryPlatforms, value]
+        : prev.primaryPlatforms.filter((platform) => platform !== value);
+      return { ...prev, primaryPlatforms };
+    });
+  }, []);
 
-    if (user.role === "influencer" && age < 18) {
-      setError("You must be at least 18 years old to register.");
-      return;
-    }
+ const handleSubmit = async (e) => {
+   e.preventDefault();
+   const age = calculateAge(user.birthday);
 
-    if (user.password !== user.confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
+   if (user.role === "influencer" && age < 18) {
+     setError("You must be at least 18 years old to register.");
+     return;
+   }
 
-    try {
-      setLoading(true);
-      await newRequest.post("/auth/register", user);
-      setLoading(false);
-      setSuccess("Registration successful! Redirecting...");
-      setTimeout(() => navigate("/login"), 2000);
-    } catch (err) {
-      setLoading(false);
-      setError("Registration failed. Please try again.");
-      console.log(err);
-    }
-  };
+   if (user.password !== user.confirmPassword) {
+     setError("Passwords do not match");
+     return;
+   }
+
+   if (user.role === "influencer" && user.primaryPlatforms.length !== 3) {
+     setError("You must select exactly 3 platforms.");
+     return;
+   }
+
+   // Clean up the user object based on the role
+   const filteredUser = { ...user }; // Create a copy of the user state
+   if (user.role === "freelancer") {
+     delete filteredUser.companySize; // Remove companySize for freelancers
+     delete filteredUser.businessName; // Remove brand-specific fields
+     delete filteredUser.jobTitle;
+     delete filteredUser.website;
+     delete filteredUser.industry;
+   } else if (user.role === "influencer") {
+     delete filteredUser.companySize; // Remove irrelevant fields
+     delete filteredUser.businessName;
+     delete filteredUser.jobTitle;
+     delete filteredUser.website;
+     delete filteredUser.industry;
+   }
+
+   try {
+     setLoading(true);
+     await newRequest.post("/auth/register", filteredUser); // Send the cleaned user object
+     setLoading(false);
+     setSuccess("Registration successful! Redirecting...");
+     setTimeout(() => navigate("/login"), 2000);
+   } catch (err) {
+     setLoading(false);
+     setError("Registration failed. Please try again.");
+     console.log(err);
+   }
+ };
+
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">
-          Register as <span className="capitalize">{user.role}</span>
+          Register as {user.role === "influencer" ? "Content Creator" : user.role}
         </h2>
 
         <form onSubmit={handleSubmit}>
@@ -112,7 +150,7 @@ function Register() {
               <input
                 type="text"
                 name="businessName"
-                placeholder="Business Name"
+                placeholder="Brand/Company Name"
                 value={user.businessName}
                 onChange={handleChange}
                 className="border p-2 mb-2 w-full"
@@ -120,9 +158,18 @@ function Register() {
               />
               <input
                 type="text"
-                name="contactName"
-                placeholder="Contact Name"
-                value={user.contactName}
+                name="fullName"
+                placeholder="Contact Person's Full Name"
+                value={user.fullName}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+                required
+              />
+              <input
+                type="text"
+                name="jobTitle"
+                placeholder="Job Title"
+                value={user.jobTitle}
                 onChange={handleChange}
                 className="border p-2 mb-2 w-full"
                 required
@@ -132,6 +179,56 @@ function Register() {
                 name="phone"
                 placeholder="Phone Number"
                 value={user.phone}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+              />
+              <input
+                type="text"
+                name="country"
+                placeholder="Country of Headquarters"
+                value={user.country}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+                required
+              />
+              <input
+                type="text"
+                name="city"
+                placeholder="City"
+                value={user.city}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+                required
+              />
+              <input
+                type="text"
+                name="website"
+                placeholder="Company Website"
+                value={user.website}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+              />
+              <div className="mb-4">
+                <label className="block text-gray-700">Company Size</label>
+                <select
+                  name="companySize"
+                  value={user.companySize}
+                  onChange={handleChange}
+                  className="w-full border rounded-lg px-4 py-2"
+                  required
+                >
+                  <option value="">Select Company Size</option>
+                  <option value="1-10">1-10 employees</option>
+                  <option value="11-50">11-50 employees</option>
+                  <option value="51-100">51-100 employees</option>
+                  <option value="100+">100+ employees</option>
+                </select>
+              </div>
+              <input
+                type="text"
+                name="industry"
+                placeholder="Industry"
+                value={user.industry}
                 onChange={handleChange}
                 className="border p-2 mb-2 w-full"
               />
@@ -151,9 +248,46 @@ function Register() {
               />
               <input
                 type="text"
-                name="portfolioLinks"
-                placeholder="Portfolio Links"
-                value={user.portfolioLinks}
+                name="phone"
+                placeholder="Phone Number"
+                value={user.phone}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+              />
+              <div className="mb-4">
+                <label className="block text-gray-700">Date of Birth</label>
+                <input
+                  type="date"
+                  name="birthday"
+                  value={user.birthday}
+                  onChange={handleChange}
+                  className="w-full border rounded-lg px-4 py-2"
+                  required
+                />
+              </div>
+              <input
+                type="text"
+                name="country"
+                placeholder="Country of Residence"
+                value={user.country}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+                required
+              />
+              <input
+                type="text"
+                name="city"
+                placeholder="City"
+                value={user.city}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+                required
+              />
+              <input
+                type="text"
+                name="preferredLanguages"
+                placeholder="Preferred Languages"
+                value={user.preferredLanguages}
                 onChange={handleChange}
                 className="border p-2 mb-2 w-full"
                 required
@@ -164,7 +298,7 @@ function Register() {
           {user.role === "influencer" && (
             <>
               <div className="mb-4">
-                <label className="block text-gray-700">Birthday</label>
+                <label className="block text-gray-700">Date of Birth</label>
                 <input
                   type="date"
                   name="birthday"
@@ -185,22 +319,148 @@ function Register() {
               />
               <input
                 type="text"
-                name="youtubeLink"
-                placeholder="YouTube Link"
-                value={user.youtubeLink}
+                name="phone"
+                placeholder="Phone Number"
+                value={user.phone}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+              />
+              <input
+                type="text"
+                name="country"
+                placeholder="Country of Residence"
+                value={user.country}
                 onChange={handleChange}
                 className="border p-2 mb-2 w-full"
                 required
               />
               <input
                 type="text"
-                name="tiktokLink"
-                placeholder="TikTok Link"
-                value={user.tiktokLink}
+                name="city"
+                placeholder="City"
+                value={user.city}
                 onChange={handleChange}
                 className="border p-2 mb-2 w-full"
                 required
               />
+              <input
+                type="text"
+                name="preferredLanguages"
+                placeholder="Preferred Languages"
+                value={user.preferredLanguages}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+                required
+              />
+
+              <div className="mb-4">
+                <label className="block text-gray-700">Select 3 Platforms</label>
+                <label className="block text-gray-700">
+                  <input
+                    type="checkbox"
+                    value="YouTube"
+                    checked={user.primaryPlatforms.includes("YouTube")}
+                    onChange={handleCheckboxChange}
+                  />
+                  YouTube
+                </label>
+                <label className="block text-gray-700">
+                  <input
+                    type="checkbox"
+                    value="Instagram"
+                    checked={user.primaryPlatforms.includes("Instagram")}
+                    onChange={handleCheckboxChange}
+                  />
+                  Instagram
+                </label>
+                <label className="block text-gray-700">
+                  <input
+                    type="checkbox"
+                    value="TikTok"
+                    checked={user.primaryPlatforms.includes("TikTok")}
+                    onChange={handleCheckboxChange}
+                  />
+                  TikTok
+                </label>
+                <label className="block text-gray-700">
+                  <input
+                    type="checkbox"
+                    value="Facebook"
+                    checked={user.primaryPlatforms.includes("Facebook")}
+                    onChange={handleCheckboxChange}
+                  />
+                  Facebook
+                </label>
+                <label className="block text-gray-700">
+                  <input
+                    type="checkbox"
+                    value="Twitter"
+                    checked={user.primaryPlatforms.includes("Twitter")}
+                    onChange={handleCheckboxChange}
+                  />
+                  Twitter
+                </label>
+              </div>
+              {user.primaryPlatforms.includes("YouTube") && (
+                <input
+                  type="text"
+                  name="youtubeLink"
+                  placeholder="YouTube Link"
+                  value={user.youtubeLink}
+                  onChange={handleChange}
+                  className="border p-2 mb-2 w-full"
+                />
+              )}
+              {user.primaryPlatforms.includes("Instagram") && (
+                <input
+                  type="text"
+                  name="instagramLink"
+                  placeholder="Instagram Link"
+                  value={user.instagramLink}
+                  onChange={handleChange}
+                  className="border p-2 mb-2 w-full"
+                />
+              )}
+              {user.primaryPlatforms.includes("TikTok") && (
+                <input
+                  type="text"
+                  name="tiktokLink"
+                  placeholder="TikTok Link"
+                  value={user.tiktokLink}
+                  onChange={handleChange}
+                  className="border p-2 mb-2 w-full"
+                />
+              )}
+              {user.primaryPlatforms.includes("Facebook") && (
+                <input
+                  type="text"
+                  name="facebookLink"
+                  placeholder="Facebook Link"
+                  value={user.facebookLink}
+                  onChange={handleChange}
+                  className="border p-2 mb-2 w-full"
+                />
+              )}
+              {user.primaryPlatforms.includes("Twitter") && (
+                <input
+                  type="text"
+                  name="twitterLink"
+                  placeholder="Twitter Link"
+                  value={user.twitterLink}
+                  onChange={handleChange}
+                  className="border p-2 mb-2 w-full"
+                />
+              )}
+              {user.primaryPlatforms.includes("Blog") && (
+                <input
+                  type="text"
+                  name="blogLink"
+                  placeholder="Blog/Website Link"
+                  value={user.blogLink}
+                  onChange={handleChange}
+                  className="border p-2 mb-2 w-full"
+                />
+              )}
             </>
           )}
 
