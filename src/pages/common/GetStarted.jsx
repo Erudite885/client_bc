@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
-import { itemData } from "../../constants/data";
+
 
 export const GetStarted = () => {
   const navigate = useNavigate();

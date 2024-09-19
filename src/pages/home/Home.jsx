@@ -1,5 +1,7 @@
 import React from "react";
 import "./Home.scss";
+import image2 from "../../assets/cta.jpg";
+import { Button } from "../../components/Button/Button";
 import Featured from "../../components/featured/Featured";
 import Slide from "../../components/slide/Slide";
 import hero1 from "../../assets/hero1.jpg";
@@ -12,7 +14,6 @@ function Home() {
   return (
     <div className="home">
       <Featured />
-      
       <div className="py-12 px-28">
         <h2 className="font-bold text-2xl">Top Content Creators</h2>
         <Slide slidesToShow={4} arrowsScroll={4}>
@@ -122,14 +123,35 @@ function Home() {
             </Link>
           </div>
           <div className="item">
-            <img
-              src={hero3}
-              alt=""
-            />
+            <img src={hero3} alt="" />
           </div>
         </div>
       </div>
 
+      <div className="bg-white text-center md:py-16 md:px-8 flex flex-col-reverse md:flex-col">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-2">Create, Connect, and Collaborate!</h2>
+          <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl md:text-5xl">
+            Sign Up to Discover Opportunities!
+          </h1>
+          <p className="mt-4 text-lg text-gray-500">Unlock Your Full Potential!</p>
+          <div className="mt-8">
+            <Button onClick={() => handleUserTypeSelection("influencer")} className="py-4 px-16 text-lg">
+              Get Started
+            </Button>
+          </div>
+        </div>
+        <div className="flex justify-center md:mt-12">
+          <div className="flex flex-col md:flex-row items-center justify-center space-x-4">
+            <img
+              src={image2}
+              alt="Model 2"
+              // className="h-32 sm:h-48 md:h-64 lg:h-72"
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

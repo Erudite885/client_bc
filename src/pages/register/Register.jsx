@@ -1,94 +1,240 @@
-import React, { useState } from "react";
-import upload from "../../utils/upload";
+import React, { useCallback, useEffect, useState } from "react";
+import moment from "moment";
 import "./Register.scss";
 import newRequest from "../../utils/newRequest";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from "../../components/Button/Button";
 
 function Register() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
-  const [file, setFile] = useState(null);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
-    img: "",
-    country: "",
-    isSeller: false,
-    desc: "",
+    confirmPassword: "",
+    phone: "",
+    role: "brand",
+    birthday: "",
+    businessName: "",
+    contactName: "",
+    website: "",
+    companySize: "",
+    industry: "",
+    fullName: "",
+    portfolioLinks: "",
+    youtubeLink: "",
+    tiktokLink: "",
+    otherLink: "",
   });
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const role = queryParams.get("role");
+    if (role) {
+      setUser((prev) => ({ ...prev, role }));
+    }
+  }, [location]);
 
-  const handleChange = (e) => {
-    setUser((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
-    });
-  };
+  const calculateAge = useCallback((dateString) => {
+    return moment().diff(moment(dateString, "YYYY-MM-DD"), "years");
+  }, []);
 
-  const handleSeller = (e) => {
-    setUser((prev) => {
-      return { ...prev, isSeller: e.target.checked };
-    });
-  };
-  
+  const handleChange = useCallback((e) => {
+    setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const age = calculateAge(user.birthday);
 
-    const url = await upload(file);
+    if (user.role === "influencer" && age < 18) {
+      setError("You must be at least 18 years old to register.");
+      return;
+    }
+
+    if (user.password !== user.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
     try {
       setLoading(true);
-      await newRequest.post("/auth/register", {
-        ...user,
-        img: url
-      });
+      await newRequest.post("/auth/register", user);
       setLoading(false);
-      navigate("/login");
+      setSuccess("Registration successful! Redirecting...");
+      setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
       setLoading(false);
+      setError("Registration failed. Please try again.");
       console.log(err);
     }
   };
+
   return (
-    <div className="register">
-      <form onSubmit={handleSubmit}>
-        <div className="left">
-          <h1>Create a new account</h1>
-          <label htmlFor="">Username</label>
-          <input name="username" type="text" placeholder="johndoe" onChange={handleChange} />
-          <label htmlFor="">Email</label>
-          <input name="email" type="email" placeholder="email" onChange={handleChange} />
-          <label htmlFor="">Password</label>
-          <input name="password" type="password" onChange={handleChange} />
-          <label htmlFor="">Profile Picture</label>
-          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-          <label htmlFor="">Country</label>
-          <input name="country" type="text" placeholder="Usa" onChange={handleChange} />
-          <button type="submit" disabled={loading}>
-            {loading ? "Loading..." : "Register"}
-          </button>
-        </div>
-        <div className="right">
-          <h1>I want to become a seller</h1>
-          <div className="toggle">
-            <label htmlFor="">Activate the seller account</label>
-            <label className="switch">
-              <input type="checkbox" onChange={handleSeller} />
-              <span className="slider round"></span>
-            </label>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-center">
+          Register as <span className="capitalize">{user.role}</span>
+        </h2>
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-gray-700">Username</label>
+            <input
+              type="text"
+              name="username"
+              value={user.username}
+              onChange={handleChange}
+              className="w-full border rounded-lg px-4 py-2"
+              required
+            />
           </div>
-          <label htmlFor="">Phone Number</label>
-          <input name="phone" type="text" placeholder="+1 234 567 89" onChange={handleChange} />
-          <label htmlFor="">Description</label>
-          <textarea
-            placeholder="A short description of yourself"
-            name="desc"
-            id=""
-            cols="30"
-            rows="10"
-            onChange={handleChange}
-          ></textarea>
-        </div>
-      </form>
+
+          <div className="mb-4">
+            <label className="block text-gray-700">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={user.email}
+              onChange={handleChange}
+              className="w-full border rounded-lg px-4 py-2"
+              required
+            />
+          </div>
+
+          {user.role === "brand" && (
+            <>
+              <input
+                type="text"
+                name="businessName"
+                placeholder="Business Name"
+                value={user.businessName}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+                required
+              />
+              <input
+                type="text"
+                name="contactName"
+                placeholder="Contact Name"
+                value={user.contactName}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+                required
+              />
+              <input
+                type="text"
+                name="phone"
+                placeholder="Phone Number"
+                value={user.phone}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+              />
+            </>
+          )}
+
+          {user.role === "freelancer" && (
+            <>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="Full Name"
+                value={user.fullName}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+                required
+              />
+              <input
+                type="text"
+                name="portfolioLinks"
+                placeholder="Portfolio Links"
+                value={user.portfolioLinks}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+                required
+              />
+            </>
+          )}
+
+          {user.role === "influencer" && (
+            <>
+              <div className="mb-4">
+                <label className="block text-gray-700">Birthday</label>
+                <input
+                  type="date"
+                  name="birthday"
+                  value={user.birthday}
+                  onChange={handleChange}
+                  className="w-full border rounded-lg px-4 py-2"
+                  required
+                />
+              </div>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="Full Name"
+                value={user.fullName}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+                required
+              />
+              <input
+                type="text"
+                name="youtubeLink"
+                placeholder="YouTube Link"
+                value={user.youtubeLink}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+                required
+              />
+              <input
+                type="text"
+                name="tiktokLink"
+                placeholder="TikTok Link"
+                value={user.tiktokLink}
+                onChange={handleChange}
+                className="border p-2 mb-2 w-full"
+                required
+              />
+            </>
+          )}
+
+          <div className="mb-4">
+            <label className="block text-gray-700">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={user.password}
+              onChange={handleChange}
+              className="w-full border rounded-lg px-4 py-2"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={user.confirmPassword}
+              onChange={handleChange}
+              className="w-full border rounded-lg px-4 py-2"
+              required
+            />
+          </div>
+
+          <input type="hidden" name="role" value={user.role} />
+          <Button type="submit" variant="primary" className="w-full">
+            Register
+          </Button>
+          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+          {success && <p className="text-green-500 text-center mb-4">{success}</p>}
+        </form>
+      </div>
     </div>
   );
 }
