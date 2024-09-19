@@ -19,23 +19,26 @@ function Register() {
     confirmPassword: "",
     phone: "",
     role: "brand",
-    birthday: "",
+    website: "",
+    companySize: "",
+    industry: "",
     businessName: "",
     jobTitle: "",
     country: "",
     city: "",
-    website: "",
-    companySize: "",
-    industry: "",
     fullName: "",
-    preferredLanguages: "",
-    youtubeLink: "",
-    tiktokLink: "",
-    facebookLink: "",
-    instagramLink: "",
-    twitterLink: "",
-    blogLink: "",
-    primaryPlatforms: [],
+    age: "",
+    portfolioLinks: "",
+    preferredLanguages: [],
+    primaryPlatform: [],
+    socialProfiles: {
+      youtube: "",
+      instagram: "",
+      tiktok: "",
+      facebook: "",
+      twitter: "",
+      website: "",
+    },
   });
 
   useEffect(() => {
@@ -54,15 +57,26 @@ function Register() {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);
 
-  const handleCheckboxChange = useCallback((e) => {
-    const { value, checked } = e.target;
-    setUser((prev) => {
-      const primaryPlatforms = checked
-        ? [...prev.primaryPlatforms, value]
-        : prev.primaryPlatforms.filter((platform) => platform !== value);
-      return { ...prev, primaryPlatforms };
-    });
-  }, []);
+ const handleCheckboxChange = useCallback((e) => {
+   const { value, checked } = e.target;
+   setUser((prev) => {
+     const updatedPlatforms = checked
+       ? [...prev.primaryPlatform, value]
+       : prev.primaryPlatform.filter((platform) => platform !== value);
+     return { ...prev, primaryPlatform: updatedPlatforms };
+   });
+ }, []);
+
+    const handlePreferredLanguagesChange = (e) => {
+      const { options } = e.target;
+      const selectedLanguages = Array.from(options)
+        .filter((option) => option.selected)
+        .map((option) => option.value);
+      setUser((prev) => ({
+        ...prev,
+        preferredLanguages: selectedLanguages,
+      }));
+    };
 
  const handleSubmit = async (e) => {
    e.preventDefault();
@@ -78,7 +92,7 @@ function Register() {
      return;
    }
 
-   if (user.role === "influencer" && user.primaryPlatforms.length !== 3) {
+   if (user.role === "influencer" && user.primaryPlatform.length !== 3) {
      setError("You must select exactly 3 platforms.");
      return;
    }
@@ -283,14 +297,34 @@ function Register() {
                 className="border p-2 mb-2 w-full"
                 required
               />
+              <select
+                multiple
+                name="preferredLanguages"
+                value={user.preferredLanguages}
+                onChange={handlePreferredLanguagesChange}
+                className="border p-2 mb-2 w-full"
+              >
+                <option value="English">English</option>
+                <option disabled value="Spanish">
+                  Spanish
+                </option>
+                <option disabled value="French">
+                  French
+                </option>
+                <option disabled value="German">
+                  German
+                </option>
+                <option disabled value="Mandarin">
+                  Mandarin
+                </option>
+              </select>
               <input
                 type="text"
-                name="preferredLanguages"
-                placeholder="Preferred Languages"
-                value={user.preferredLanguages}
+                name="portfolioLinks"
+                placeholder="Portfolio Links (comma-separated)"
+                value={user.portfolioLinks}
                 onChange={handleChange}
                 className="border p-2 mb-2 w-full"
-                required
               />
             </>
           )}
@@ -343,15 +377,19 @@ function Register() {
                 className="border p-2 mb-2 w-full"
                 required
               />
-              <input
-                type="text"
+              <select
+                multiple
                 name="preferredLanguages"
-                placeholder="Preferred Languages"
                 value={user.preferredLanguages}
-                onChange={handleChange}
+                onChange={handlePreferredLanguagesChange}
                 className="border p-2 mb-2 w-full"
-                required
-              />
+              >
+                <option value="English">English</option>
+                <option  value="Spanish">Spanish</option>
+                <option  value="French">French</option>
+                <option  value="German">German</option>
+                <option  value="Mandarin">Mandarin</option>
+              </select>
 
               <div className="mb-4">
                 <label className="block text-gray-700">Select 3 Platforms</label>
