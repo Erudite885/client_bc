@@ -46,4 +46,9 @@
       font-size: 12px;
     }
   }
+
+  /* Custom CSS for slower carousel slide transitions */
+.carousel-track {
+  transition: transform 2s ease-in-out !important; /* Slows down the sliding transition to 2 seconds */
+}
 }

@@ -397,7 +397,7 @@ function Register() {
                   <input
                     type="checkbox"
                     value="YouTube"
-                    checked={user.primaryPlatforms.includes("YouTube")}
+                    checked={user.primaryPlatform.includes("YouTube")}
                     onChange={handleCheckboxChange}
                   />
                   YouTube
@@ -406,7 +406,7 @@ function Register() {
                   <input
                     type="checkbox"
                     value="Instagram"
-                    checked={user.primaryPlatforms.includes("Instagram")}
+                    checked={user.primaryPlatform.includes("Instagram")}
                     onChange={handleCheckboxChange}
                   />
                   Instagram
@@ -415,7 +415,7 @@ function Register() {
                   <input
                     type="checkbox"
                     value="TikTok"
-                    checked={user.primaryPlatforms.includes("TikTok")}
+                    checked={user.primaryPlatform.includes("TikTok")}
                     onChange={handleCheckboxChange}
                   />
                   TikTok
@@ -424,7 +424,7 @@ function Register() {
                   <input
                     type="checkbox"
                     value="Facebook"
-                    checked={user.primaryPlatforms.includes("Facebook")}
+                    checked={user.primaryPlatform.includes("Facebook")}
                     onChange={handleCheckboxChange}
                   />
                   Facebook
@@ -433,13 +433,13 @@ function Register() {
                   <input
                     type="checkbox"
                     value="Twitter"
-                    checked={user.primaryPlatforms.includes("Twitter")}
+                    checked={user.primaryPlatform.includes("Twitter")}
                     onChange={handleCheckboxChange}
                   />
                   Twitter
                 </label>
               </div>
-              {user.primaryPlatforms.includes("YouTube") && (
+              {user.primaryPlatform.includes("YouTube") && (
                 <input
                   type="text"
                   name="youtubeLink"
@@ -449,7 +449,7 @@ function Register() {
                   className="border p-2 mb-2 w-full"
                 />
               )}
-              {user.primaryPlatforms.includes("Instagram") && (
+              {user.primaryPlatform.includes("Instagram") && (
                 <input
                   type="text"
                   name="instagramLink"
@@ -459,7 +459,7 @@ function Register() {
                   className="border p-2 mb-2 w-full"
                 />
               )}
-              {user.primaryPlatforms.includes("TikTok") && (
+              {user.primaryPlatform.includes("TikTok") && (
                 <input
                   type="text"
                   name="tiktokLink"
@@ -469,7 +469,7 @@ function Register() {
                   className="border p-2 mb-2 w-full"
                 />
               )}
-              {user.primaryPlatforms.includes("Facebook") && (
+              {user.primaryPlatform.includes("Facebook") && (
                 <input
                   type="text"
                   name="facebookLink"
@@ -479,7 +479,7 @@ function Register() {
                   className="border p-2 mb-2 w-full"
                 />
               )}
-              {user.primaryPlatforms.includes("Twitter") && (
+              {user.primaryPlatform.includes("Twitter") && (
                 <input
                   type="text"
                   name="twitterLink"
@@ -489,7 +489,7 @@ function Register() {
                   className="border p-2 mb-2 w-full"
                 />
               )}
-              {user.primaryPlatforms.includes("Blog") && (
+              {user.primaryPlatform.includes("Blog") && (
                 <input
                   type="text"
                   name="blogLink"

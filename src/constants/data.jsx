@@ -440,16 +440,16 @@ export const faqs = [
   ];
 
   export const images = [
-      { src: image1, alt: "Image 1", className: "w-20 h-20" },
-      { src: image2, alt: "Image 2", className: "w-20 h-20" },
-      { src: image3, alt: "Image 3", className: "w-20 h-20" },
-      { src: image1, alt: "Image 4", className: "w-20 h-20" },
-      { src: image2, alt: "Image 5", className: "w-20 h-20" },
-      { src: image3, alt: "Image 6", className: "w-20 h-20" },
-      { src: image1, alt: "Image 7", className: "w-20 h-20" },
-      { src: image2, alt: "Image 8", className: "w-20 h-20" },
-      { src: image2, alt: "Image 8", className: "w-20 h-20" },
-      { src: image3, alt: "Image 10", className: "w-20 h-20" },
-      { src: image1, alt: "Image 11", className: "w-20 h-20" },
-      { src: image2, alt: "Image 12", className: "w-20 h-20" },
+      { src: image1, alt: "Image 1", className: "w-full h-auto" },
+      { src: image2, alt: "Image 2", className: "w-full h-auto" },
+      { src: image3, alt: "Image 3", className: "w-full h-auto" },
+      { src: image1, alt: "Image 4", className: "w-full h-auto" },
+      { src: image2, alt: "Image 5", className: "w-full h-auto" },
+      { src: image3, alt: "Image 6", className: "w-full h-auto" },
+      { src: image1, alt: "Image 7", className: "w-full h-auto" },
+      { src: image2, alt: "Image 8", className: "w-full h-auto" },
+      { src: image2, alt: "Image 8", className: "w-full h-auto" },
+      { src: image3, alt: "Image 10", className: "w-full h-auto" },
+      { src: image1, alt: "Image 11", className: "w-full h-auto" },
+      { src: image2, alt: "Image 12", className: "w-full h-auto" },
     ];

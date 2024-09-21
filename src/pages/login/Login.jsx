@@ -1,20 +1,29 @@
 import React, { useState } from "react";
 import "./Login.scss";
-import brand3 from '../../assets/brand3.svg'
+import Carousel from "infinite-react-carousel";
+
+import in3 from "../../assets/in1.jpg";
+import in2 from "../../assets/in2.jpg";
+import in1 from "../../assets/in3.jpg";
 import newRequest from "../../utils/newRequest";
 import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword); // Toggle between showing and hiding the password
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await newRequest.post("/auth/login", { username, password });
+      const res = await newRequest.post("/auth/login", { email, password });
       localStorage.setItem("currentUser", JSON.stringify(res.data));
       navigate("/");
     } catch (err) {
@@ -23,87 +32,100 @@ function Login() {
   };
 
   return (
-    <section className="bg-gradient-to-r from-white via-midLightBlue">
-      <div className="flex flex-col items-center justify-center px-6 mx-auto py-4">
-        {/* <div className="flex items-center  font-semibold text-gray-900 dark:text-white">
-          <img className="w-full h-48" src={brand3} alt="logo" />
-        </div> */}
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              {/* <img className="w-full h-48" src="/brandlogo-small.png" alt="logo" /> */}
-              Sign in to your account
-            </h1>
-            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-              <div>
-                <label for="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Your Email
-                </label>
+    <div className="flex h-screen place-items-center bg-gradient-to-r from-white via-midLightBlue">
+      {/* Left section: Login form */}
+      <div className="w-full lg:w-1/2 bg-white flex justify-center items-center bg-gradient-to-r from-white via-midLightBlue">
+        <div className="w-full max-w-md p-6 space-y-6">
+          <div className="text-center">
+            <h2 className="text-xl font-semibold text-gray-800">Welcome!</h2>
+            <p className="text-gray-500">Sign in to your account</p>
+          </div>
+
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full p-2.5 border border-gray-300 rounded-lg bg-gray-50"
+                placeholder="email@example.com"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full p-2.5 border border-gray-300 rounded-lg bg-gray-50"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
                 <input
-                  name="email"
-                  type="text"
-                  id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="johnDoe@example.com"
-                  required=""
+                  id="remember-me"
+                  type="checkbox"
+                  className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                 />
-              </div>
-              <div>
-                <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Password
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                  Remember Me
                 </label>
-                <input
-                  name="password"
-                  type="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
-                />
               </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-start">
-                  {/* <div className="flex items-center h-5">
-                    <input
-                      id="remember"
-                      aria-describedby="remember"
-                      type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                      required=""
-                    />
-                  </div> */}
-                  {/* <div className="ml-3 text-sm">
-                    <label for="remember" className="text-gray-500 dark:text-gray-300">
-                      Remember me
-                    </label>
-                  </div> */}
-                </div>
-                <Link
-                  to="/forgot-password"
-                  className="text-sm font-medium text-gray-600 hover:underline dark:text-primary-500"
-                >
-                  Forgot password?
+              <div className="text-sm">
+                <Link to="/forgot-password" className="font-medium text-blue-600 hover:text-blue-500">
+                  Forgot Password?
                 </Link>
               </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-midLightBlue hover:bg- focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
-                Sign in
-              </button>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Don’t have an account yet?{" "}
-                <Link to="/get-started" className="font-medium text-primary-600 hover:underline dark:text-primary-500">
-                  Sign up
-                </Link>
-              </p>
-              {error && error}
-            </form>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
+            >
+              Continue
+            </button>
+          </form>
+
+          {error && <div className="text-red-600 text-sm">{error}</div>}
+
+          <div className="text-center">
+            <p className="text-sm text-gray-500">
+              Don't have an account?{" "}
+              <Link to="/get-started" className="text-blue-600 hover:underline">
+                Create one here
+              </Link>
+              .
+            </p>
           </div>
         </div>
       </div>
-    </section>
+      {/* Right section: Sample Image */}
+      <div className="hidden lg:flex lg:w-1/2 h-full">
+        <div className="h-full w-full">
+          <Carousel autoplay arrows={false} dots={false} wheel={false} autoplaySpeed={8000} infinite>
+            <div>
+              <img src={in1} alt="Slide 1" className="object-cover w-full h-screen " />
+            </div>
+            <div>
+              <img src={in2} alt="Slide 2" className="object-cover w-full h-screen " />
+            </div>
+            <div>
+              <img src={in3} alt="Slide 3" className="object-cover w-full h-screen " />
+            </div>
+          </Carousel>
+        </div>
+      </div>
+    </div>
   );
 }
 
