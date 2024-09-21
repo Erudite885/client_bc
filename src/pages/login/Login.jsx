@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Login.scss";
 import Carousel from "infinite-react-carousel";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"; // Importing eye and eye-slash icons
 
 import in3 from "../../assets/in1.jpg";
 import in2 from "../../assets/in2.jpg";
@@ -60,15 +61,24 @@ function Login() {
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-2.5 border border-gray-300 rounded-lg bg-gray-50"
-                placeholder="••••••••"
-                required
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"} // Toggle input type based on showPassword state
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full p-2.5 border border-gray-300 rounded-lg bg-gray-50"
+                  placeholder="••••••••"
+                  required
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-3 flex items-center text-sm text-gray-600"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />} {/* Icon changes based on visibility */}
+                </button>
+              </div>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center">
