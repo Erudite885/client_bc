@@ -34,7 +34,7 @@ export const GetStarted = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-white via-midLightBlue py-16 px-4">
       {/* Text Carousel with Glassmorphism effect */}
-      <div className="flex items-center justify-center py-8 px-6 mb-8 bg-white bg-opacity-10 backdrop-blur-lg backdrop-opacity-80 rounded-xl shadow-lg border border-white/40">
+      <div className="w-3/4 flex items-center justify-center py-8 px-6 mb-8 bg-white bg-opacity-10 backdrop-blur-lg backdrop-opacity-80 rounded-xl shadow-lg border border-white/40">
         <h1 className="text-4xl font-bold text-gray-800 text-center transition-all duration-500 ease-in-out">
           {headings[currentHeading]}
         </h1>

@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import moment from "moment";
-import "./Register.scss";
 import newRequest from "../../utils/newRequest";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
@@ -27,7 +26,7 @@ function Register() {
     country: "",
     city: "",
     fullName: "",
-    age: "",
+    birthday: "",
     portfolioLinks: "",
     preferredLanguages: [],
     primaryPlatform: [],
@@ -37,10 +36,10 @@ function Register() {
       tiktok: "",
       facebook: "",
       twitter: "",
-      website: "",
     },
   });
 
+  // Set the role from the URL query parameter
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const role = queryParams.get("role");
@@ -49,83 +48,88 @@ function Register() {
     }
   }, [location]);
 
+  // Calculate age based on birthday input
   const calculateAge = useCallback((dateString) => {
     return moment().diff(moment(dateString, "YYYY-MM-DD"), "years");
   }, []);
 
+  // Handle input changes for form fields
   const handleChange = useCallback((e) => {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);
 
- const handleCheckboxChange = useCallback((e) => {
-   const { value, checked } = e.target;
-   setUser((prev) => {
-     const updatedPlatforms = checked
-       ? [...prev.primaryPlatform, value]
-       : prev.primaryPlatform.filter((platform) => platform !== value);
-     return { ...prev, primaryPlatform: updatedPlatforms };
-   });
- }, []);
+  // Handle checkbox changes for platform selection (for influencers)
+  const handleCheckboxChange = useCallback((e) => {
+    const { value, checked } = e.target;
+    setUser((prev) => {
+      const updatedPlatforms = checked
+        ? [...prev.primaryPlatform, value]
+        : prev.primaryPlatform.filter((platform) => platform !== value);
 
-    const handlePreferredLanguagesChange = (e) => {
-      const { options } = e.target;
-      const selectedLanguages = Array.from(options)
-        .filter((option) => option.selected)
-        .map((option) => option.value);
-      setUser((prev) => ({
-        ...prev,
-        preferredLanguages: selectedLanguages,
-      }));
-    };
+      // Ensure only 3 platforms are selected
+      if (updatedPlatforms.length > 3) {
+        return prev; // Ignore if more than 3 are selected
+      }
 
- const handleSubmit = async (e) => {
-   e.preventDefault();
-   const age = calculateAge(user.birthday);
+      return { ...prev, primaryPlatform: updatedPlatforms };
+    });
+  }, []);
 
-   if (user.role === "influencer" && age < 18) {
-     setError("You must be at least 18 years old to register.");
-     return;
-   }
+  // Handle changes for preferred languages
+  const handlePreferredLanguagesChange = (e) => {
+    const { options } = e.target;
+    const selectedLanguages = Array.from(options)
+      .filter((option) => option.selected)
+      .map((option) => option.value);
+    setUser((prev) => ({
+      ...prev,
+      preferredLanguages: selectedLanguages,
+    }));
+  };
 
-   if (user.password !== user.confirmPassword) {
-     setError("Passwords do not match");
-     return;
-   }
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(user)
+    const age = calculateAge(user.birthday);
 
-   if (user.role === "influencer" && user.primaryPlatform.length !== 3) {
-     setError("You must select exactly 3 platforms.");
-     return;
-   }
+    // Role-specific validation
+    if (user.role === "influencer" && age < 18) {
+      setError("You must be at least 18 years old to register.");
+      return;
+    }
 
-   // Clean up the user object based on the role
-   const filteredUser = { ...user }; // Create a copy of the user state
-   if (user.role === "freelancer") {
-     delete filteredUser.companySize; // Remove companySize for freelancers
-     delete filteredUser.businessName; // Remove brand-specific fields
-     delete filteredUser.jobTitle;
-     delete filteredUser.website;
-     delete filteredUser.industry;
-   } else if (user.role === "influencer") {
-     delete filteredUser.companySize; // Remove irrelevant fields
-     delete filteredUser.businessName;
-     delete filteredUser.jobTitle;
-     delete filteredUser.website;
-     delete filteredUser.industry;
-   }
+    if (user.password !== user.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
 
-   try {
-     setLoading(true);
-     await newRequest.post("/auth/register", filteredUser); // Send the cleaned user object
-     setLoading(false);
-     setSuccess("Registration successful! Redirecting...");
-     setTimeout(() => navigate("/login"), 2000);
-   } catch (err) {
-     setLoading(false);
-     setError("Registration failed. Please try again.");
-     console.log(err);
-   }
- };
+    if (user.role === "influencer" && user.primaryPlatform.length !== 3) {
+      setError("You must select exactly 3 platforms.");
+      return;
+    }
 
+    // Clean up the user object based on the role
+    const filteredUser = { ...user };
+    if (user.role === "freelancer" || user.role === "influencer") {
+      delete filteredUser.companySize;
+      delete filteredUser.businessName;
+      delete filteredUser.jobTitle;
+      delete filteredUser.website;
+      delete filteredUser.industry;
+    }
+
+    try {
+      setLoading(true);
+      await newRequest.post("/auth/register", filteredUser);
+      setLoading(false);
+      setSuccess("Registration successful! Redirecting...");
+      setTimeout(() => navigate("/login"), 2000);
+    } catch (err) {
+      setLoading(false);
+      setError("Registration failed. Please try again.");
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
@@ -135,6 +139,7 @@ function Register() {
         </h2>
 
         <form onSubmit={handleSubmit}>
+          {/* Username */}
           <div className="mb-4">
             <label className="block text-gray-700">Username</label>
             <input
@@ -147,6 +152,7 @@ function Register() {
             />
           </div>
 
+          {/* Email */}
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
             <input
@@ -159,6 +165,7 @@ function Register() {
             />
           </div>
 
+          {/* Brand-specific fields */}
           {user.role === "brand" && (
             <>
               <input
@@ -249,6 +256,7 @@ function Register() {
             </>
           )}
 
+          {/* Freelancer-specific fields */}
           {user.role === "freelancer" && (
             <>
               <input
@@ -305,18 +313,10 @@ function Register() {
                 className="border p-2 mb-2 w-full"
               >
                 <option value="English">English</option>
-                <option disabled value="Spanish">
-                  Spanish
-                </option>
-                <option disabled value="French">
-                  French
-                </option>
-                <option disabled value="German">
-                  German
-                </option>
-                <option disabled value="Mandarin">
-                  Mandarin
-                </option>
+                <option value="Spanish">Spanish</option>
+                <option value="French">French</option>
+                <option value="German">German</option>
+                <option value="Mandarin">Mandarin</option>
               </select>
               <input
                 type="text"
@@ -329,6 +329,7 @@ function Register() {
             </>
           )}
 
+          {/* Influencer-specific fields */}
           {user.role === "influencer" && (
             <>
               <div className="mb-4">
@@ -385,10 +386,10 @@ function Register() {
                 className="border p-2 mb-2 w-full"
               >
                 <option value="English">English</option>
-                <option  value="Spanish">Spanish</option>
-                <option  value="French">French</option>
-                <option  value="German">German</option>
-                <option  value="Mandarin">Mandarin</option>
+                <option value="Spanish">Spanish</option>
+                <option value="French">French</option>
+                <option value="German">German</option>
+                <option value="Mandarin">Mandarin</option>
               </select>
 
               <div className="mb-4">
@@ -444,7 +445,7 @@ function Register() {
                   type="text"
                   name="youtubeLink"
                   placeholder="YouTube Link"
-                  value={user.youtubeLink}
+                  value={user.socialProfiles.youtube}
                   onChange={handleChange}
                   className="border p-2 mb-2 w-full"
                 />
@@ -454,7 +455,7 @@ function Register() {
                   type="text"
                   name="instagramLink"
                   placeholder="Instagram Link"
-                  value={user.instagramLink}
+                  value={user.socialProfiles.instagram}
                   onChange={handleChange}
                   className="border p-2 mb-2 w-full"
                 />
@@ -464,7 +465,7 @@ function Register() {
                   type="text"
                   name="tiktokLink"
                   placeholder="TikTok Link"
-                  value={user.tiktokLink}
+                  value={user.socialProfiles.tiktok}
                   onChange={handleChange}
                   className="border p-2 mb-2 w-full"
                 />
@@ -474,7 +475,7 @@ function Register() {
                   type="text"
                   name="facebookLink"
                   placeholder="Facebook Link"
-                  value={user.facebookLink}
+                  value={user.socialProfiles.facebook}
                   onChange={handleChange}
                   className="border p-2 mb-2 w-full"
                 />
@@ -484,17 +485,7 @@ function Register() {
                   type="text"
                   name="twitterLink"
                   placeholder="Twitter Link"
-                  value={user.twitterLink}
-                  onChange={handleChange}
-                  className="border p-2 mb-2 w-full"
-                />
-              )}
-              {user.primaryPlatform.includes("Blog") && (
-                <input
-                  type="text"
-                  name="blogLink"
-                  placeholder="Blog/Website Link"
-                  value={user.blogLink}
+                  value={user.socialProfiles.twitter}
                   onChange={handleChange}
                   className="border p-2 mb-2 w-full"
                 />
@@ -502,6 +493,7 @@ function Register() {
             </>
           )}
 
+          {/* Password */}
           <div className="mb-4">
             <label className="block text-gray-700">Password</label>
             <input
@@ -513,6 +505,8 @@ function Register() {
               required
             />
           </div>
+
+          {/* Confirm Password */}
           <div className="mb-4">
             <label className="block text-gray-700">Confirm Password</label>
             <input
@@ -525,10 +519,12 @@ function Register() {
             />
           </div>
 
-          <input type="hidden" name="role" value={user.role} />
-          <Button type="submit" variant="primary" className="w-full">
-            Register
+          {/* Submit Button */}
+          <Button type="submit" variant="primary" className="w-full" disabled={loading}>
+            {loading ? "Registering..." : "Register"}
           </Button>
+
+          {/* Error and Success Messages */}
           {error && <p className="text-red-500 text-center mb-4">{error}</p>}
           {success && <p className="text-green-500 text-center mb-4">{success}</p>}
         </form>
