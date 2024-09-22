@@ -206,7 +206,7 @@ function Register() {
       await newRequest.post("/auth/register", dataToSend);
       setLoading(false);
       setSuccess("Registration successful! Redirecting...");
-      setTimeout(() => navigate("/verify"), 2000);
+      setTimeout(() => navigate("/email-sent"), 2000);
     } catch (err) {
       setLoading(false);
       setError(err.response?.data?.error || "Registration failed. Please try again.");

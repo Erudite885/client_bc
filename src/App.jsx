@@ -29,6 +29,9 @@ import { Contact } from "./pages/common/Contact";
 import { NotFound } from "./pages/common/NotFound";
 import { Support } from "./pages/common/Support";
 import { About } from "./pages/common/About";
+import ResendEmailVerification from "./pages/auth/ResendEmailVerification";
+import EmailSent from "./pages/auth/EmailSent";
+import ResetPassword from "./pages/auth/ResetPassword";
 function App() {
   const queryClient = new QueryClient();
 
@@ -124,9 +127,22 @@ function App() {
         {
           path: "/forgot-password",
           element: <ForgotPassword />,
-        },{
-          path: "/verify",
+        },
+        {
+          path: "/reset-password",
+          element: <ResetPassword />,
+        },
+        {
+          path: "/verify-email",
           element: <EmailVerification />,
+        },
+        {
+          path: "/email-sent",
+          element: <EmailSent />,
+        },
+        {
+          path: "/resend-verification",
+          element: <ResendEmailVerification />,
         },
         // {
         //   path: "/pay/:id",
