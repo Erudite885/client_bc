@@ -41,6 +41,15 @@ export const verifyEmail = async (token) => {
   }
 };
 
+export const resendVerificationEmail = async (token) => {
+  try {
+    const response = await axios.post(`${API_URL}/auth/resend-verification`, { token });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Email verification failed");
+  }
+};
+
 export const forgotPassword = async (email) => {
   try {
     const response = await axios.post(`${API_URL}/auth/forgot-password`, { email });

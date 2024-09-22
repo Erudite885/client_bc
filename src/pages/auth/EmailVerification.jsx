@@ -54,20 +54,3 @@ const EmailVerification = () => {
 
 export default EmailVerification
 
-// <Carousel
-//             autoplay
-//             autoplaySpeed={5000}
-//             dots
-//             animationDuration={1000}
-//             arrows={false}
-//             className="carousel-container"
-//           >
-//             {carouselItems.map((item, index) => (
-//               <div key={index} className="w-full h-full flex items-center justify-center">
-//                 {item.type === "image" && (
-//                   <img src={item.src} alt={`Slide ${index + 1}`} className="object-cover w-full h-full" />
-//                 )}
-//                 {item.type === "video" && <video src={item.src} controls className="object-cover w-full h-full" />}
-//               </div>
-//             ))}
-//           </Carousel>

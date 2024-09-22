@@ -210,7 +210,7 @@ function Register() {
     } catch (err) {
       setLoading(false);
       setError(err.response?.data?.error || "Registration failed. Please try again.");
-      console.log(err.response?.data);
+      console.log(err);
     }
   };
 
@@ -226,7 +226,6 @@ function Register() {
           <p className="text-gray-500">Sign up for your account</p>
         </div>
 
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         {success && <p className="text-green-500 text-center mb-4">{success}</p>}
 
         <form onSubmit={handleSubmit}>
