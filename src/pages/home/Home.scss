@@ -3,7 +3,7 @@
     background-color: #f1f9fd;
     display: flex;
     justify-content: center;
-    padding: 100px 0px;
+    padding: 100px 0;
 
     &.dark {
       background-color: #172d3b;
@@ -41,14 +41,24 @@
     }
 
     .container {
-      width: 1400px;
+      width: 100%;
+      max-width: 1400px;
       display: flex;
       align-items: center;
-      gap: 200px;
+      gap: 50px;
+      padding: 0 20px;
+
+      @media (max-width: 1024px) {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+      }
+
       .item {
         display: flex;
         flex-direction: column;
         gap: 15px;
+
         &:first-child {
           flex: 2;
         }
@@ -56,13 +66,18 @@
           flex: 3;
         }
 
-        img{
+        img {
           width: 100%;
+          height: auto;
+          object-fit: cover;
+          max-width: 100%;
         }
+
         h1 {
           font-weight: 500;
           margin-bottom: 10px;
         }
+
         .title {
           display: flex;
           align-items: center;
@@ -70,11 +85,13 @@
           font-weight: 500;
           font-size: 18px;
           color: #666;
+
           img {
             width: 24px;
             height: 24px;
           }
         }
+
         p {
           font-size: 18px;
           font-weight: 300;
@@ -83,31 +100,28 @@
           letter-spacing: 1px;
         }
 
-        video{
-          width: 720px;
+        video {
+          width: 100%;
+          max-width: 720px;
+          height: auto;
         }
       }
     }
-
-    //   &.reverse {
-    //     background-color: #0d084d;
-    //     color: white;
-    //     .container {
-    //       flex-direction: row-reverse;
-    //     }
-    //   }
   }
 
   .explore {
     display: flex;
     justify-content: center;
-    padding: 100px 0px;
+    padding: 100px 0;
 
     .container {
-      width: 1400px;
+      width: 100%;
+      max-width: 1400px;
+      padding: 0 20px;
 
-      h1{
+      h1 {
         color: #555;
+        text-align: center;
       }
 
       .items {
@@ -115,6 +129,12 @@
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+        gap: 20px;
+
+        @media (max-width: 768px) {
+          justify-content: center;
+          gap: 40px;
+        }
 
         .item {
           width: 250px;
@@ -132,25 +152,78 @@
             height: 50px;
           }
 
-          .line{
+          .line {
             width: 50px;
             height: 2px;
             background-color: lightgray;
-            transition: all .3s ease;
+            transition: all 0.3s ease;
           }
 
           span {
             font-weight: 300;
           }
 
-          &:hover{
-            .line{
+          &:hover {
+            .line {
               width: 80px;
               background-color: #1d9fbf;
             }
           }
         }
       }
+    }
+  }
+
+  // Handle smaller screen sizes for content creators section
+  .py-12 {
+    padding: 12px;
+    @media (max-width: 768px) {
+      padding: 12px 0;
+    }
+    @media (max-width: 480px) {
+      padding: 8px;
+    }
+  }
+
+  .px-28 {
+    padding: 0 28px;
+    @media (max-width: 768px) {
+      padding: 0 16px;
+    }
+    @media (max-width: 480px) {
+      padding: 0 8px;
+    }
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0 20px;
+    @media (max-width: 1024px) {
+      padding: 0 15px;
+    }
+  }
+
+  .text-2xl {
+    font-size: 1.5rem;
+    @media (max-width: 768px) {
+      font-size: 1.25rem;
+    }
+    @media (max-width: 480px) {
+      font-size: 1rem;
+    }
+  }
+
+  .font-bold {
+    font-weight: bold;
+  }
+
+  // Handle Explore Section Responsiveness
+  .explore .container h1 {
+    @media (max-width: 768px) {
+      font-size: 1.75rem;
+    }
+    @media (max-width: 480px) {
+      font-size: 1.5rem;
     }
   }
 }

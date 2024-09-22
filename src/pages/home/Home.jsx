@@ -125,37 +125,6 @@ function Home() {
         </div>
       </div>
 
-      <div className="features dark">
-        <div className="container">
-          <div className="item">
-            <h1>
-              A business solution designed for <i>teams</i>
-            </h1>
-            <p>Upgrade to a curated experience packed with tools and benefits, dedicated to Brands</p>
-            <div className="title">
-              <img src="./img/check.png" alt="" />
-              Connect to creators with proven experience
-            </div>
-
-            <div className="title">
-              <img src="./img/check.png" alt="" />
-              Get matched with the perfect talent by a customer success manager
-            </div>
-
-            <div className="title">
-              <img src="./img/check.png" alt="" />
-              Manage teamwork and boost productivity with one powerful workspace
-            </div>
-            <Link to="/get-started">
-              <button>Get Started</button>
-            </Link>
-          </div>
-          <div className="item">
-            <img src={hero3} alt="" />
-          </div>
-        </div>
-      </div>
-
       <div className="bg-white text-center md:py-16 md:px-8 flex flex-col-reverse md:flex-col">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-2">Create, Connect, and Collaborate!</h2>
