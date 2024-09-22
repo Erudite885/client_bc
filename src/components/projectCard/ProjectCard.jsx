@@ -4,14 +4,23 @@ import "./ProjectCard.scss";
 function ProjectCard({ card }) {
   return (
     <div className="projectCard">
-      <img src={card.pp} alt="" />
-      <div className="info">
-        {/* <img src={card.pp} alt="" /> */}
+      {/* Embedding YouTube Short using iframe */}
+      <iframe
+        width="100%"
+        height="auto"
+        src={`https://www.youtube.com/embed/${card.videoId}?autoplay=1&mute=1&loop=1&playlist=${card.videoId}`}
+        title="YouTube video player"
+        // frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        loading="lazy"
+        className="projectVideo"
+      ></iframe>
+      {/* <div className="info">
         <div className="texts">
-          {/* <h2>{card.cat}</h2> */}
           <span>{card.username}</span>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

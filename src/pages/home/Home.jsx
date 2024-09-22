@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.scss";
 import image2 from "../../assets/cta.jpg";
 import { Button } from "../../components/Button/Button";
@@ -8,15 +8,43 @@ import hero1 from "../../assets/hero1.jpg";
 import hero3 from "../../assets/hero3.jpg";
 import { Link } from "react-router-dom";
 import ProjectCard from "../../components/projectCard/ProjectCard";
-import {  projects } from "../../data";
+import { projects } from "../../data";
 
 function Home() {
+  const [slidesToShow, setSlidesToShow] = useState(4);
+
+  // This effect listens for window resizing and adjusts the number of slides to show
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+
+      if (width < 768) {
+        setSlidesToShow(1); // Show 1 slide on mobile devices (less than 768px)
+      } else if (width >= 768 && width < 1440) {
+        setSlidesToShow(3); // Show 2 slides on medium-sized devices (768px to 1439px)
+      } else {
+        setSlidesToShow(4); // Show 4 slides on larger screens
+      }
+    };
+
+    // Set the initial value on page load
+    handleResize();
+
+    // Attach the resize event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="home">
       <Featured />
       <div className="py-12 px-28">
         <h2 className="font-bold text-2xl">Top Content Creators</h2>
-        <Slide slidesToShow={4} arrowsScroll={4}>
+        <Slide slidesToShow={slidesToShow} arrowsScroll={4}>
           {projects.map((card) => (
             <ProjectCard key={card.id} card={card} />
           ))}
