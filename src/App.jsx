@@ -10,6 +10,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Add from "./pages/add/Add";
 import ForgotPassword from './pages/auth/ForgotPassword'
+import EmailVerification from "./pages/auth/EmailVerification";
 import Orders from "./pages/orders/Orders";
 import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
@@ -123,6 +124,9 @@ function App() {
         {
           path: "/forgot-password",
           element: <ForgotPassword />,
+        },{
+          path: "/verify",
+          element: <EmailVerification />,
         },
         // {
         //   path: "/pay/:id",

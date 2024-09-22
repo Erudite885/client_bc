@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { verifyEmail } from '../../api/Auth';
+import { Button } from '../../components/Button/Button';
 
-export const EmailVerification = () => {
+const EmailVerification = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [searchParams] = useSearchParams();
@@ -40,7 +41,9 @@ export const EmailVerification = () => {
           <p className="text-lg mb-4">
             A verification link has been sent to your email address. Please check your inbox.
           </p>
-          <Button onClick={handleResend} variant="primary">
+          <Button
+            // onClick={handleResend}
+            variant="primary">
             Resend Verification Email
           </Button>
         </div>
@@ -48,3 +51,23 @@ export const EmailVerification = () => {
     </div>
   );
 };
+
+export default EmailVerification
+
+// <Carousel
+//             autoplay
+//             autoplaySpeed={5000}
+//             dots
+//             animationDuration={1000}
+//             arrows={false}
+//             className="carousel-container"
+//           >
+//             {carouselItems.map((item, index) => (
+//               <div key={index} className="w-full h-full flex items-center justify-center">
+//                 {item.type === "image" && (
+//                   <img src={item.src} alt={`Slide ${index + 1}`} className="object-cover w-full h-full" />
+//                 )}
+//                 {item.type === "video" && <video src={item.src} controls className="object-cover w-full h-full" />}
+//               </div>
+//             ))}
+//           </Carousel>
