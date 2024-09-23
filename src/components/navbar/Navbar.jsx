@@ -10,21 +10,8 @@ function Navbar() {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const { pathname } = useLocation();
-
-  // const isActive = () => {
-  //   window.scrollY > 0 ? setActive(true) : setActive(false);
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", isActive);
-  //   return () => {
-  //     window.removeEventListener("scroll", isActive);
-  //   };
-  // }, []);
-
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
+console.log(currentUser)
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -51,11 +38,11 @@ function Navbar() {
           {!currentUser && <Link to="/register?role=influencer">Become a Content Creator</Link>}
           {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
-              <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
+              <img src={currentUser.profileImage || "/img/noavatar.jpg"} alt="" />
               <span>{currentUser?.username}</span>
               {open && (
                 <div className="options">
-                  {currentUser.isSeller && (
+                  {currentUser.role === "freelancer" && (
                     <>
                       <Link className="link" to="/mygigs">
                         Gigs
@@ -65,7 +52,7 @@ function Navbar() {
                       </Link>
                     </>
                   )}
-                  {currentUser.isAdmin && (
+                  {currentUser.role === "admin" && (
                     <>
                       <Link className="link" to="/mygigs">
                         Profile
@@ -84,7 +71,7 @@ function Navbar() {
                       </Link>
                     </>
                   )}
-                  {currentUser.isInfluencer && (
+                  {currentUser.role === "influencer" && (
                     <>
                       <Link className="link" to="/mygigs">
                         Profile
@@ -94,7 +81,7 @@ function Navbar() {
                       </Link>
                     </>
                   )}
-                  {currentUser.isBrand && (
+                  {currentUser.role === "brand" && (
                     <>
                       <Link className="link" to="/mygigs">
                         Projects

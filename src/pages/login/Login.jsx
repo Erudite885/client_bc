@@ -77,7 +77,7 @@ function Login() {
         localStorage.removeItem("savedEmail");
       }
 
-      navigate("/");
+      navigate("/edit-profile");
     } catch (err) {
       setError(err.response?.data || "Something went wrong");
     } finally {

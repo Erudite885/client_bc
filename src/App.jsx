@@ -9,21 +9,19 @@ import Gig from "./pages/gig/Gig";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Add from "./pages/add/Add";
-import ForgotPassword from './pages/auth/ForgotPassword'
+import ForgotPassword from "./pages/auth/ForgotPassword";
 import EmailVerification from "./pages/auth/EmailVerification";
 import Orders from "./pages/orders/Orders";
 import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
 import MyGigs from "./pages/myGigs/MyGigs";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Pay from "./pages/pay/Pay";
 import Success from "./pages/success/Success";
 import { PrivacyPolicy } from "./pages/common/PrivacyPolicy";
 import { FAQ } from "./pages/common/FAQ";
 import { TermsOfService } from "./pages/common/TermsOfService";
+import { ProfileEdit } from "./pages/profileEdit/ProfileEdit";
 import { GetStarted } from "./pages/common/GetStarted";
 import { Contact } from "./pages/common/Contact";
 import { NotFound } from "./pages/common/NotFound";
@@ -123,6 +121,10 @@ function App() {
         {
           path: "/login",
           element: <Login />,
+        },
+        {
+          path: "/edit-profile",
+          element: <ProfileEdit />,
         },
         {
           path: "/forgot-password",
