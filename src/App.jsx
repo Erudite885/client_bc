@@ -30,6 +30,7 @@ import { About } from "./pages/common/About";
 import ResendEmailVerification from "./pages/auth/ResendEmailVerification";
 import EmailSent from "./pages/auth/EmailSent";
 import ResetPassword from "./pages/auth/ResetPassword";
+
 function App() {
   const queryClient = new QueryClient();
 
@@ -45,10 +46,16 @@ function App() {
     );
   };
 
+  const WIP = () => {
+    return (
+      <p>Work in Progress</p>
+    )
+  }
+
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout />,
+      element: <WIP />,
       children: [
         {
           path: "/",
