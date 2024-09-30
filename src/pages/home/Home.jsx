@@ -3,12 +3,9 @@ import "./Home.scss";
 import image2 from "../../assets/cta.jpg";
 import { Button } from "../../components/Button/Button";
 import Featured from "../../components/featured/Featured";
-import Slide from "../../components/slide/Slide";
 import hero1 from "../../assets/hero1.jpg";
-import hero3 from "../../assets/hero3.jpg";
 import { Link } from "react-router-dom";
-import ProjectCard from "../../components/projectCard/ProjectCard";
-import { projects } from "../../data";
+;
 import Carousel from "../../components/carousel/Carousel";
 
 function Home() {
@@ -44,12 +41,6 @@ function Home() {
     <div className="home">
       <Featured />
       <div className="py-12 px-28">
-        {/* <h2 className="font-bold text-2xl">Top Content Creators</h2> */}
-        {/* <Slide slidesToShow={slidesToShow} arrowsScroll={4}>
-          {projects.map((card) => (
-            <ProjectCard key={card.id} card={card} />
-          ))}
-        </Slide> */}
         <Carousel />
       </div>
 
