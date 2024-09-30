@@ -5,19 +5,19 @@ import hero2 from "../../assets/hero2.jpg"; // Ensure the path is correct
 function Featured() {
   const words = [
     "Collaborators",
-    "Talent",
     "Freelancers",
+    "Talent",
     "Content Creators",
+    "Professionals",
     "Influencers",
     "Experts",
-    "Professionals",
   ];
 
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [fade, setFade] = useState(true);
 
   useEffect(() => {
-    const fadeOut = setTimeout(() => setFade(false), 4500); // Start fade out before word change
+    const fadeOut = setTimeout(() => setFade(false), 5000); // Start fade out before word change
     const fadeIn = setTimeout(() => {
       setCurrentWordIndex((prevIndex) => (prevIndex === words.length - 1 ? 0 : prevIndex + 1));
       setFade(true);
@@ -34,14 +34,14 @@ function Featured() {
       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-center">
         {/* Left Section */}
         <div className="left w-full lg:w-1/2 mt-8 lg:mt-0 text-center lg:text-left">
-          <h1 className="text-2xl font-bold text-gray-800">
-            <span className="uppercase text-sm">Connect with</span> <br />
+          <h1 className="uppercase text-sm font-semibold text-gray-800">
+            <span className="">Connect with</span> <br />
             <span
               className={`relative inline-block transition-all duration-500 ${
-                fade ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+                fade ? "opacity-100 translate-y-0" : "opacity-20 translate-y-2"
               }`}
             >
-              <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent text-4xl">
+              <span className="bg-gradient-to-r from-green-700 via-blue-500 to-orange-400 bg-clip-text text-transparent animate-gradient bg-200% text-4xl">
                 Top {words[currentWordIndex]}
               </span>
             </span>{" "}

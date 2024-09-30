@@ -41,9 +41,15 @@ export default {
           "90%": { transform: "translateY(0)", opacity: "1" },
           "100%": { transform: "translateY(-100%)", opacity: "0" },
         },
+        //
+        animatedgradient: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
       },
       animation: {
-        gradient: "gradient 5s ease infinite",
+        gradient: "animatedgradient 6s ease infinite alternate",
         // New scrolling animation
         scrollUp: "scrollUp 6s ease-in-out infinite",
       },
