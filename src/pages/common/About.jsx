@@ -10,11 +10,8 @@ import { images, teamMembers } from "../../constants/data";
 
 export function About() {
 
- 
-
   return (
     <>
-
       {/* Section 2: Mission and Stats */}
       <section className="flex flex-col relative md:flex-row items-center justify-between max-w-6xl mx-auto py-16 px-4 md:px-8 mt-16">
         <div className="absolute top-0 left-0 w-full h-full">
@@ -58,7 +55,7 @@ export function About() {
       </section>
 
       {/* Section : Vision and Stats */}
-      <section className="flex flex-col relative md:flex-row items-center justify-between max-w-6xl mx-auto py-16 px-4 md:px-8">
+      <section className="flex flex-col-reverse relative md:flex-row items-center justify-between max-w-6xl mx-auto py-16 px-4 md:px-8">
         {/* Left Side - Vision Content */}
 
         <motion.div

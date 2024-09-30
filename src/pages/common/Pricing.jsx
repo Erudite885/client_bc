@@ -1,114 +1,124 @@
 // src/components/Pricing.jsx
 import React from "react";
+import { FaUserPlus, FaHandshake } from "react-icons/fa"; // Example icons
+import { Link } from "react-router-dom";
 
 const Pricing = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 sm:p-6 lg:p-8 mt-16">
-      <div className="bg-white rounded-lg shadow-lg p-6 sm:p-8 lg:p-10 max-w-4xl w-full">
-        {/* Main Heading */}
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-heading text-gray-800 mb-6 text-center">
-          Brand Collaborator Pricing Structure
-        </h1>
+    <div className="bg-gray-100 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">Pricing</h2>
+          <p className="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+            Transparent and Fair Pricing for Freelancers and Content Creators
+          </p>
+        </div>
 
-        {/* Freelancer Registration Fee */}
-        <section className="mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-heading text-blue-600 mb-4">
-            1. Freelancer Registration Fee
-          </h2>
-          <ul className="list-disc list-inside space-y-2 font-body text-gray-700 text-base sm:text-lg">
-            <li>
-              <span className="font-semibold">One-Time Fee:</span> Freelancers will pay a one-time registration fee of
-              N5000 (approximately $10-$15 USD depending on current exchange rates).
-            </li>
-            <li>
-              <span className="font-semibold">Global Equivalence:</span> The fee will be equivalent to N5000 for users
-              worldwide, adjusted for currency exchange rates to ensure consistency.
-            </li>
-          </ul>
-        </section>
-
-        {/* Content Creator Booking Fee */}
-        <section className="mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-heading text-blue-600 mb-4">
-            2. Content Creator Booking Fee
-          </h2>
-          <ul className="list-disc list-inside space-y-2 font-body text-gray-700 text-base sm:text-lg">
-            <li>
-              <span className="font-semibold">Service Charge:</span> A 20% commission will be charged on each booking
-              made through the platform for content creation services.
-            </li>
-            <li>
-              <span className="font-semibold">Commission Details:</span> This commission applies to the total amount
-              charged by the content creator for services such as video creation, post collaboration, and live sessions.
-            </li>
-          </ul>
-        </section>
-
-        {/* Example Scenarios */}
-        <section className="mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-heading text-blue-600 mb-4">Example Scenarios</h2>
-          {/* Freelancer Registration Example */}
-          <div className="mb-4 sm:mb-6">
-            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800">1. Freelancer Registration:</h3>
-            <ul className="list-disc list-inside space-y-1 font-body text-gray-700 text-base sm:text-lg">
-              <li>A freelancer registers on Brand Collaborator and pays the one-time fee of N5000.</li>
-              <li>
-                Equivalent payment for international freelancers will be calculated based on the current exchange rate,
-                ensuring they pay an equivalent amount in their local currency.
+        {/* Main Pricing Sections */}
+        <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+          {/* Freelancer Registration */}
+          <div className="bg-white rounded-lg shadow-lg p-6 w-full md:w-1/2">
+            <div className="flex items-center mb-4">
+              <FaUserPlus className="text-blue-600 text-3xl mr-3" />
+              <h3 className="text-2xl font-semibold text-gray-800">Freelancer </h3>
+            </div>
+            <ul className="mb-6 space-y-2">
+              <li className="text-gray-700">
+                <span className="font-bold">Service Charge:</span>{" "}
+                <span className="text-green-600">20% Commission</span>
+              </li>
+              <li className="text-gray-700">
+                <span className="font-bold">Global Equivalence:</span> Adjusted based on current exchange rates
               </li>
             </ul>
+            <Link to="/register?role=freelancer">
+              <button className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-200">
+                Register Now
+              </button>
+            </Link>
           </div>
 
-          {/* Content Creator Booking Example */}
-          <div>
-            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800">2. Content Creator Booking:</h3>
-            <ul className="list-disc list-inside space-y-1 font-body text-gray-700 text-base sm:text-lg">
-              <li>A brand books a content creator for a video creation project worth N100,000.</li>
-              <li>Brand Collaborator charges a 20% commission on the N100,000 fee.</li>
-              <li>
-                <span className="font-semibold">Commission Amount:</span> N20,000
+          {/* Content Creator Booking */}
+          <div className="bg-white rounded-lg shadow-lg p-6 w-full md:w-1/2">
+            <div className="flex items-center mb-4">
+              <FaHandshake className="text-blue-600 text-3xl mr-3" />
+              <h3 className="text-2xl font-semibold text-gray-800">Content Creator </h3>
+            </div>
+            <ul className="mb-6 space-y-2">
+              <li className="text-gray-700">
+                <span className="font-bold">One-Time Fee:</span> <span className="text-green-600">N5000</span> (~$10-$15
+                USD)
               </li>
-              <li>
-                <span className="font-semibold">Net Payment to Creator:</span> N80,000
+              <li className="text-gray-700">
+                <span className="font-bold">Service Charge:</span>{" "}
+                <span className="text-green-600">20% Commission</span>
+              </li>
+              <li className="text-gray-700">
+                <span className="font-bold">Details:</span> Applies to total service fees
+                {/* (e.g., video creation, post collaboration, live sessions) */}
               </li>
             </ul>
+            <Link to="/register?role=influencer">
+              <button className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-200">
+                Register Now
+              </button>
+            </Link>
           </div>
-        </section>
-
-        {/* Additional Details */}
-        <section className="mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-heading text-blue-600 mb-4">Additional Details</h2>
-          <ul className="list-disc list-inside space-y-2 font-body text-gray-700 text-base sm:text-lg">
-            <li>
-              <span className="font-semibold">Payment Processing:</span> All payments, including the registration fee
-              and commissions, will be processed securely through the Brand Collaborator platform.
-            </li>
-            <li>
-              <span className="font-semibold">Payouts to Creators:</span> Content creators will receive their net
-              payment (total fee minus the 20% commission) after the brand has made the payment.
-            </li>
-            <li>
-              <span className="font-semibold">Currency Conversion:</span> For international transactions, currency
-              conversion will be handled by the payment processor at the current exchange rate at the time of the
-              transaction.
-            </li>
-          </ul>
-        </section>
+        </div>
 
         {/* Summary of Fees */}
-        <section>
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-heading text-blue-600 mb-4">Summary of Fees</h2>
-          <ul className="list-disc list-inside space-y-2 font-body text-gray-700 text-base sm:text-lg">
+        <div className="mt-12">
+          <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Summary of Fees</h3>
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white">
+              <thead>
+                <tr>
+                  <th className="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-700">
+                    Fee Type
+                  </th>
+                  <th className="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-700">
+                    Amount
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="py-2 px-4 border-b border-gray-200">
+                    Activation Fee <small>(content creator only)</small>{" "}
+                  </td>
+                  <td className="py-2 px-4 border-b border-gray-200">N5000 (or equivalent in other currencies)</td>
+                </tr>
+                <tr>
+                  <td className="py-2 px-4 border-b border-gray-200">Commission to platform</td>
+                  <td className="py-2 px-4 border-b border-gray-200">20% of total service fee</td>
+                </tr>
+                <tr>
+                  <td className="py-2 px-4 border-b border-gray-200">Payout</td>
+                  <td className="py-2 px-4 border-b border-gray-200">80% of total service fee</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Additional Details */}
+        <div className="mt-12 bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-2xl font-semibold text-gray-800 mb-4">Additional Details</h3>
+          <ul className="space-y-2 text-gray-700">
             <li>
-              <span className="font-semibold">Freelancer Registration Fee:</span> One-time fee of N5000 (or equivalent
-              amount in other currencies).
+              <span className="font-bold">Payment Processing:</span> Secure transactions through the Brand Collaborator
+              platform
             </li>
             <li>
-              <span className="font-semibold">Content Creator Commission:</span> 20% commission on the total fee for
-              services booked through Brand Collaborator.
+              <span className="font-bold">Payouts to Creators:</span> Net payment after 20% commission deduction
+            </li>
+            <li>
+              <span className="font-bold">Currency Conversion:</span> Handled by the payment processor at the current
+              exchange rate during the transaction
             </li>
           </ul>
-        </section>
+        </div>
       </div>
     </div>
   );
