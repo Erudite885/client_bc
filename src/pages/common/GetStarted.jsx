@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 
-import in3 from "../../assets/in12.jpg";
-import in2 from "../../assets/in7.jpg";
-import in1 from "../../assets/in5.jpg";
+import in3 from "../../assets/in13.jpg";
+import in2 from "../../assets/in9.jpg";
+import in1 from "../../assets/in14.jpg";
 
 const headings = [
   "Join the Journey",
