@@ -7,6 +7,7 @@ import hero1 from "../../assets/hero1.jpg";
 import { Link } from "react-router-dom";
 ;
 import Carousel from "../../components/carousel/Carousel";
+import Footer from "../../components/footer/Footer";
 
 function Home() {
   const [slidesToShow, setSlidesToShow] = useState(4);
@@ -39,6 +40,7 @@ function Home() {
 
   return (
     <div className="home">
+      
       <Featured />
       <div className="py-12 px-28">
         <Carousel />
@@ -142,6 +144,8 @@ function Home() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

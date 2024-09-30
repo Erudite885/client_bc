@@ -15,8 +15,11 @@ export default {
           light: "#F4F3FB", // Lighter shade
         },
       },
+
       fontFamily: {
         sans: ["Open Sauce", "Lato", "sans-serif"], // Setting typography
+        heading: ['"Open Sans"', "sans-serif"],
+        body: ["Lato", "sans-serif"],
       },
       backgroundImage: (theme) => ({
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

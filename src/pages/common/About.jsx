@@ -16,7 +16,7 @@ export function About() {
     <>
 
       {/* Section 2: Mission and Stats */}
-      <section className="flex flex-col relative md:flex-row items-center justify-between max-w-6xl mx-auto py-16 px-4 md:px-8 ">
+      <section className="flex flex-col relative md:flex-row items-center justify-between max-w-6xl mx-auto py-16 px-4 md:px-8 mt-16">
         <div className="absolute top-0 left-0 w-full h-full">
           <img src={cardbg1} alt="Background" className="absolute top-0 left-0 w-auto h-auto" />
           <img src={cardbg2} alt="Background" className="absolute bottom-0 right-0 w-auto h-auto" />

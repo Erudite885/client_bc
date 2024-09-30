@@ -4,13 +4,6 @@ import brandlogo from "../../assets/brandlogo.svg";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  console.log(currentUser);
-
-  // If there is a current user, do not render the footer
-  if (currentUser) {
-    return null;
-  }
 
   return (
     <footer className="dark:bg-gray-900">
