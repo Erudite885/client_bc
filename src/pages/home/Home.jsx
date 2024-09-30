@@ -9,6 +9,7 @@ import hero3 from "../../assets/hero3.jpg";
 import { Link } from "react-router-dom";
 import ProjectCard from "../../components/projectCard/ProjectCard";
 import { projects } from "../../data";
+import Carousel from "../../components/carousel/Carousel";
 
 function Home() {
   const [slidesToShow, setSlidesToShow] = useState(4);
@@ -43,12 +44,13 @@ function Home() {
     <div className="home">
       <Featured />
       <div className="py-12 px-28">
-        <h2 className="font-bold text-2xl">Top Content Creators</h2>
-        <Slide slidesToShow={slidesToShow} arrowsScroll={4}>
+        {/* <h2 className="font-bold text-2xl">Top Content Creators</h2> */}
+        {/* <Slide slidesToShow={slidesToShow} arrowsScroll={4}>
           {projects.map((card) => (
             <ProjectCard key={card.id} card={card} />
           ))}
-        </Slide>
+        </Slide> */}
+        <Carousel />
       </div>
 
       <div className="features">

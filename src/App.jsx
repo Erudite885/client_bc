@@ -30,6 +30,7 @@ import { About } from "./pages/common/About";
 import ResendEmailVerification from "./pages/auth/ResendEmailVerification";
 import EmailSent from "./pages/auth/EmailSent";
 import ResetPassword from "./pages/auth/ResetPassword";
+import Pricing from "./pages/common/Pricing";
 
 function App() {
   const queryClient = new QueryClient();
@@ -55,7 +56,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <WIP />,
+      element: <Layout />,
       children: [
         {
           path: "/",
@@ -68,6 +69,10 @@ function App() {
         {
           path: "/privacy-policy",
           element: <PrivacyPolicy />,
+        },
+        {
+          path: "/pricing",
+          element: <Pricing />,
         },
         {
           path: "/terms-of-service",
