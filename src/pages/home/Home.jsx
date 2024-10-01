@@ -3,6 +3,7 @@ import "./Home.scss";
 import image2 from "../../assets/cta.jpg";
 import { Button } from "../../components/Button/Button";
 import Featured from "../../components/featured/Featured";
+import { FaCheckCircle } from "react-icons/fa"; // Importing the check icon
 import hero1 from "../../assets/hero1.jpg";
 import { Link } from "react-router-dom";
 ;
@@ -40,37 +41,60 @@ function Home() {
 
   return (
     <div className="home">
-      
       <Featured />
+
       <div className="py-12 px-28">
         <Carousel />
       </div>
 
-      <div className="features">
-        <div className="container">
-          <div className="item">
-            <h1>A whole world of talent at your fingertips</h1>
-            <div className="title">
-              <img src="./img/check.png" alt="" />
-              The best for every budget
+      <section className="features bg-gray-100 dark:bg-gray-800 py-16">
+        <div className="container mx-auto px-6 lg:px-24 flex flex-col-reverse lg:flex-row items-center gap-12">
+          {/* Left Section: Textual Content */}
+          <div className="w-full lg:w-1/2">
+            <h2 className="text-xl md:text-4xl font-semibold text-[#1b5171] mb-6 uppercase tracking-wider">
+              A whole world of talent at your fingertips
+            </h2>
+
+            {/* Feature Item 1 */}
+            <div className="flex items-start mb-6">
+              <FaCheckCircle className="text-blue-600 dark:text-blue-400 text-xl mt-1 mr-4" />
+              <div className="flex flex-col place-items-start">
+                <h3 className="text-xl font-medium text-gray-700 dark:text-gray-300">The best for every budget</h3>
+                <p className="text-gray-600 dark:text-gray-400 mt-1">
+                  Find high-quality services at every price point. No hourly rates, just project-based pricing.
+                </p>
+              </div>
             </div>
-            <p>Find high-quality services at every price point. No hourly rates, just project-based pricing.</p>
-            <div className="title">
-              <img src="./img/check.png" alt="" />
-              Quality work done quickly
+
+            {/* Feature Item 2 */}
+            <div className="flex items-start mb-6">
+              <FaCheckCircle className="text-blue-600 dark:text-blue-400 text-xl mt-1 mr-4" />
+              <div className="flex flex-col place-items-start">
+                <h3 className="text-xl font-medium text-gray-700 dark:text-gray-300">Quality work done quickly</h3>
+                <p className="text-gray-600 dark:text-gray-400 mt-1">
+                  Find the right creator to begin working on your project within minutes.
+                </p>
+              </div>
             </div>
-            <p>Find the right creator to begin working on your project within minutes.</p>
-            <div className="title">
-              <img src="./img/check.png" alt="" />
-              Protected payments, every time
+
+            {/* Feature Item 3 */}
+            <div className="flex items-start mb-6">
+              <FaCheckCircle className="text-blue-600 dark:text-blue-400 text-xl mt-1 mr-4" />
+              <div className="flex flex-col place-items-start">
+                <h3 className="text-xl font-medium text-gray-700 dark:text-gray-300">Protected payments, every time</h3>
+                <p className="text-gray-600 dark:text-gray-400 mt-1">
+                  Always know what you'll pay upfront. Your payment isn't released until you approve the work.
+                </p>
+              </div>
             </div>
-            <p>Always know what you'll pay upfront. Your payment isn't released until you approve the work.</p>
           </div>
-          <div className="item">
-            <img src={hero1} alt="inflencer image" />
+
+          {/* Right Section: Image */}
+          <div className="w-full lg:w-1/2">
+            <img src={hero1} alt="Influencer Image" className="w-full rounded-lg shadow-lg object-cover" />
           </div>
         </div>
-      </div>
+      </section>
 
       <div className="explore">
         <div className="container">
