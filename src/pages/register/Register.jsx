@@ -218,8 +218,8 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4 mt-20">
-      <div className="bg-white grid grid-cols-1 md:grid-cols-2 rounded-2xl shadow-lg w-full max-w-6xl">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white grid grid-cols-1 md:grid-cols-2 rounded-xl shadow-lg w-full max-w-screen-">
         {/* Image Section */}
         <div className="hidden md:block relative">
           {user.role === "influencer" && (

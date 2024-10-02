@@ -1,7 +1,5 @@
-// src/components/Navbar/Navbar.jsx
-
 import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import brandlogo from "../../assets/brandlogo.svg";
 import brandlogo_active from "../../assets/brandlogo_preview.png";
@@ -13,9 +11,8 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  console.log(currentUser);
-
   const navigate = useNavigate();
+  const location = useLocation(); // Get the current location
 
   const handleLogout = async () => {
     try {
@@ -27,7 +24,11 @@ function Navbar() {
     }
   };
 
-  if (currentUser) {
+  // List of paths where the navbar should be hidden
+  const hiddenPaths = ["/login", "/register"];
+
+  // Conditionally hide the navbar if the current path is in the hiddenPaths array
+  if (hiddenPaths.includes(location.pathname)) {
     return null;
   }
 
