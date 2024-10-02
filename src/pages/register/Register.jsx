@@ -6,6 +6,9 @@ import countryList from "react-select-country-list"; // Country selection list
 import newRequest from "../../utils/newRequest";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
+import registerImage from "../../assets/in1.jpg";
+import registerImage2 from "../../assets/in16.jpg";
+import registerImage3 from "../../assets/mission.jpg";
 
 function Register() {
   const navigate = useNavigate();
@@ -215,346 +218,367 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <div className="text-center mb-8">
-          <h2 className="text-xl font-semibold text-gray-800">
-            {" "}
-            Register as{" "}
-            {user.role === "influencer" ? "Content Creator" : user.role.charAt(0).toUpperCase() + user.role.slice(1)}
-          </h2>
-          <p className="text-gray-500">Sign up for your account</p>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4 mt-20">
+      <div className="bg-white grid grid-cols-1 md:grid-cols-2 rounded-2xl shadow-lg w-full max-w-6xl">
+        {/* Image Section */}
+        <div className="hidden md:block relative">
+          {user.role === "influencer" && (
+            <img src={registerImage} alt="Register illustration" className="object-cover h-full w-full rounded-l-lg" />
+          )}
+          {user.role === "brand" && (
+            <img src={registerImage2} alt="Register illustration" className="object-cover h-full w-full rounded-l-lg" />
+          )}
+          {user.role === "freelancer" && (
+            <img src={registerImage3} alt="Register illustration" className="object-cover h-full w-full rounded-l-lg" />
+          )}
         </div>
 
-        {success && <p className="text-green-500 text-center mb-4">{success}</p>}
-
-        <form onSubmit={handleSubmit}>
-          {/* Username */}
-          <div className="mb-4">
-            <label className="block text-gray-700">Username *</label>
-            <input
-              type="text"
-              name="username"
-              value={user.username}
-              onChange={handleChange}
-              className="w-full border rounded-lg px-4 py-2"
-              required
-            />
-          </div>
-
-          {/* Email */}
-          <div className="mb-4">
-            <label className="block text-gray-700">Email *</label>
-            <input
-              type="email"
-              name="email"
-              value={user.email}
-              onChange={handleChange}
-              className="w-full border rounded-lg px-4 py-2"
-              required
-            />
-          </div>
-
-          {/* Role-Specific Fields */}
-          {user.role === "brand" && (
-            <>
-              <div className="mb-4">
-                <label className="block text-gray-700">Business Name *</label>
-                <input
-                  type="text"
-                  name="businessName"
-                  value={user.businessName}
-                  onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700">Contact Person's Full Name *</label>
-                <input
-                  type="text"
-                  name="fullName"
-                  value={user.fullName}
-                  onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700">Job Title *</label>
-                <input
-                  type="text"
-                  name="jobTitle"
-                  value={user.jobTitle}
-                  onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700">Company Size *</label>
-                <select
-                  name="companySize"
-                  value={user.companySize}
-                  onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2"
-                  required
-                >
-                  <option value="">Select Company Size</option>
-                  <option value="1-10">1-10 employees</option>
-                  <option value="11-50">11-50 employees</option>
-                  <option value="51-100">51-100 employees</option>
-                  <option value="100+">100+ employees</option>
-                </select>
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700">Industry *</label>
-                <input
-                  type="text"
-                  name="industry"
-                  value={user.industry}
-                  onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700">Website *</label>
-                <input
-                  type="url"
-                  name="website"
-                  value={user.website}
-                  onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2"
-                  required
-                />
-              </div>
-            </>
-          )}
-
-          {user.role === "freelancer" && (
-            <>
-              <div className="mb-4">
-                <label className="block text-gray-700">Full Name *</label>
-                <input
-                  type="text"
-                  name="fullName"
-                  value={user.fullName}
-                  onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700">Preferred Languages (comma-separated) *</label>
-                <input
-                  type="text"
-                  name="preferredLanguages"
-                  value={user.preferredLanguages.join(", ")}
-                  onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2"
-                  placeholder="e.g., English, Spanish"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700">Portfolio Links (comma-separated) *</label>
-                <input
-                  type="text"
-                  name="portfolioLinks"
-                  value={user.portfolioLinks.join(", ")}
-                  onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2"
-                  placeholder="e.g., http://link1.com, http://link2.com"
-                  required
-                />
-              </div>
-            </>
-          )}
-
-          {user.role === "influencer" && (
-            <>
-              <div className="mb-4">
-                <label className="block text-gray-700">Full Name *</label>
-                <input
-                  type="text"
-                  name="fullName"
-                  value={user.fullName}
-                  onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700">Date of Birth *</label>
-                <input
-                  type="date"
-                  name="birthday"
-                  value={user.birthday}
-                  onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700">Preferred Languages (comma-separated)</label>
-                <input
-                  type="text"
-                  name="preferredLanguages"
-                  value={user.preferredLanguages.join(", ")}
-                  onChange={handleChange}
-                  className="w-full border rounded-lg px-4 py-2"
-                  placeholder="e.g., English, Spanish"
-                />
-              </div>
-
-              {/* Primary Platform Selection */}
-              <div className="mb-4">
-                <label className="block text-gray-700">Select Exactly 3 Platforms *</label>
-                <div className="flex flex-wrap">
-                  {["youtube", "instagram", "tiktok", "facebook", "twitter"].map((platform) => (
-                    <label key={platform} className="mr-4">
-                      <input
-                        type="checkbox"
-                        value={platform}
-                        checked={user.primaryPlatform.includes(platform)}
-                        onChange={handleCheckboxChange}
-                        className="mr-1"
-                      />
-                      {platform.charAt(0).toUpperCase() + platform.slice(1)}
-                    </label>
-                  ))}
-                </div>
-                {user.primaryPlatform.length > 3 && <p className="text-red-600">You can select up to 3 platforms.</p>}
-              </div>
-
-              {/* Social Profiles */}
-              {user.primaryPlatform.map((platform) => (
-                <div key={platform} className="mb-4">
-                  <label className="block text-gray-700">
-                    {platform.charAt(0).toUpperCase() + platform.slice(1)} Link *
-                  </label>
-                  <input
-                    type="url"
-                    name={`socialProfiles.${platform}`}
-                    value={user.socialProfiles[platform]}
-                    onChange={handleChange}
-                    className="w-full border rounded-lg px-4 py-2"
-                    required
-                  />
-                </div>
-              ))}
-            </>
-          )}
-
-          {/* Common Fields */}
-          <div className="mb-4">
-            <label className="block text-gray-700">Phone</label>
-            <input
-              type="tel"
-              name="phone"
-              value={user.phone}
-              onChange={handleChange}
-              className="w-full border rounded-lg px-4 py-2"
-            />
-          </div>
-
-          {/* Country Dropdown */}
-          <div className="mb-4">
-            <label className="block text-gray-700">Country *</label>
-            <Select
-              options={countryOptions}
-              value={countryOptions.find((option) => option.label === user.country)}
-              onChange={handleCountryChange}
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="Select your country"
-              isClearable={true}
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700">City *</label>
-            <input
-              type="text"
-              name="city"
-              value={user.city}
-              onChange={handleChange}
-              className="w-full border rounded-lg px-4 py-2"
-              required
-            />
-          </div>
-
-          {/* Password */}
-          <div className="mb-4">
-            <label className="block text-gray-700">Password *</label>
-            <input
-              type="password"
-              name="password"
-              value={user.password}
-              onChange={handleChange}
-              className="w-full border rounded-lg px-4 py-2"
-              required
-            />
-          </div>
-
-          {/* Confirm Password */}
-          <div className="mb-4">
-            <label className="block text-gray-700">Confirm Password *</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={user.confirmPassword}
-              onChange={handleChange}
-              className="w-full border rounded-lg px-4 py-2"
-              required
-            />
-          </div>
-
-          {/* Accept Terms of Service and Privacy Policy */}
-          <div className="mb-4">
-            <p>
-              By registering you accept our{" "}
-              <Link to="/terms-of-service" className="text-blue-600 hover:underline">
-                Terms of Service
-              </Link>{" "}
-              and{" "}
-              <Link to="/privacy-policy" className="text-blue-600 hover:underline">
-                Privacy Policy
+        {/* Form Section */}
+        <div className="p-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-semibold text-gray-800">
+              Register as{" "}
+              {user.role === "influencer" ? "Content Creator" : user.role.charAt(0).toUpperCase() + user.role.slice(1)}
+            </h2>
+            <p className="text-gray-500">
+              Not a {user.role === "influencer" ? "Content Creator" : user.role}?{" "}
+              <Link to="/get-started" className="text-blue-600 hover:underline">
+                Get Started
               </Link>
               .
             </p>
           </div>
 
-          {/* Submit Button */}
-          <Button type="submit" variant="primary" className="w-full" disabled={loading}>
-            {loading ? "Registering..." : "Register"}
-          </Button>
-        </form>
+          {success && <p className="text-green-500 text-center mb-4">{success}</p>}
 
-        {error && (
-          <div className="text-red-600 text-sm mt-4" role="alert">
-            {error}
+          <form onSubmit={handleSubmit}>
+            {/* Username */}
+            <div className="mb-4">
+              <label className="block text-gray-700">Username *</label>
+              <input
+                type="text"
+                name="username"
+                value={user.username}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-4 py-2"
+                required
+              />
+            </div>
+
+            {/* Email */}
+            <div className="mb-4">
+              <label className="block text-gray-700">Email *</label>
+              <input
+                type="email"
+                name="email"
+                value={user.email}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-4 py-2"
+                required
+              />
+            </div>
+
+            {/* Role-Specific Fields */}
+            {user.role === "brand" && (
+              <>
+                <div className="mb-4">
+                  <label className="block text-gray-700">Business Name *</label>
+                  <input
+                    type="text"
+                    name="businessName"
+                    value={user.businessName}
+                    onChange={handleChange}
+                    className="w-full border rounded-lg px-4 py-2"
+                    required
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-gray-700">Contact Person's Full Name *</label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={user.fullName}
+                    onChange={handleChange}
+                    className="w-full border rounded-lg px-4 py-2"
+                    required
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-gray-700">Job Title *</label>
+                  <input
+                    type="text"
+                    name="jobTitle"
+                    value={user.jobTitle}
+                    onChange={handleChange}
+                    className="w-full border rounded-lg px-4 py-2"
+                    required
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-gray-700">Company Size *</label>
+                  <select
+                    name="companySize"
+                    value={user.companySize}
+                    onChange={handleChange}
+                    className="w-full border rounded-lg px-4 py-2"
+                    required
+                  >
+                    <option value="">Select Company Size</option>
+                    <option value="1-10">1-10 employees</option>
+                    <option value="11-50">11-50 employees</option>
+                    <option value="51-100">51-100 employees</option>
+                    <option value="100+">100+ employees</option>
+                  </select>
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-gray-700">Industry *</label>
+                  <input
+                    type="text"
+                    name="industry"
+                    value={user.industry}
+                    onChange={handleChange}
+                    className="w-full border rounded-lg px-4 py-2"
+                    required
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-gray-700">Website *</label>
+                  <input
+                    type="url"
+                    name="website"
+                    value={user.website}
+                    onChange={handleChange}
+                    className="w-full border rounded-lg px-4 py-2"
+                    required
+                  />
+                </div>
+              </>
+            )}
+
+            {user.role === "freelancer" && (
+              <>
+                <div className="mb-4">
+                  <label className="block text-gray-700">Full Name *</label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={user.fullName}
+                    onChange={handleChange}
+                    className="w-full border rounded-lg px-4 py-2"
+                    required
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-gray-700">Preferred Languages (comma-separated) *</label>
+                  <input
+                    type="text"
+                    name="preferredLanguages"
+                    value={user.preferredLanguages.join(", ")}
+                    onChange={handleChange}
+                    className="w-full border rounded-lg px-4 py-2"
+                    placeholder="e.g., English, Spanish"
+                    required
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-gray-700">Portfolio Links (comma-separated) *</label>
+                  <input
+                    type="text"
+                    name="portfolioLinks"
+                    value={user.portfolioLinks.join(", ")}
+                    onChange={handleChange}
+                    className="w-full border rounded-lg px-4 py-2"
+                    placeholder="e.g., http://link1.com, http://link2.com"
+                    required
+                  />
+                </div>
+              </>
+            )}
+
+            {user.role === "influencer" && (
+              <>
+                <div className="mb-4">
+                  <label className="block text-gray-700">Full Name *</label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={user.fullName}
+                    onChange={handleChange}
+                    className="w-full border rounded-lg px-4 py-2"
+                    required
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-gray-700">Date of Birth *</label>
+                  <input
+                    type="date"
+                    name="birthday"
+                    value={user.birthday}
+                    onChange={handleChange}
+                    className="w-full border rounded-lg px-4 py-2"
+                    required
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-gray-700">Preferred Languages (comma-separated)</label>
+                  <input
+                    type="text"
+                    name="preferredLanguages"
+                    value={user.preferredLanguages.join(", ")}
+                    onChange={handleChange}
+                    className="w-full border rounded-lg px-4 py-2"
+                    placeholder="e.g., English, Spanish"
+                  />
+                </div>
+
+                {/* Primary Platform Selection */}
+                <div className="mb-4">
+                  <label className="block text-gray-700">Select Exactly 3 Platforms *</label>
+                  <div className="flex flex-wrap">
+                    {["youtube", "instagram", "tiktok", "facebook", "twitter"].map((platform) => (
+                      <label key={platform} className="mr-4">
+                        <input
+                          type="checkbox"
+                          value={platform}
+                          checked={user.primaryPlatform.includes(platform)}
+                          onChange={handleCheckboxChange}
+                          className="mr-1"
+                        />
+                        {platform.charAt(0).toUpperCase() + platform.slice(1)}
+                      </label>
+                    ))}
+                  </div>
+                  {user.primaryPlatform.length > 3 && <p className="text-red-600">You can select up to 3 platforms.</p>}
+                </div>
+
+                {/* Social Profiles */}
+                {user.primaryPlatform.map((platform) => (
+                  <div key={platform} className="mb-4">
+                    <label className="block text-gray-700">
+                      {platform.charAt(0).toUpperCase() + platform.slice(1)} Link *
+                    </label>
+                    <input
+                      type="url"
+                      name={`socialProfiles.${platform}`}
+                      value={user.socialProfiles[platform]}
+                      onChange={handleChange}
+                      className="w-full border rounded-lg px-4 py-2"
+                      required
+                    />
+                  </div>
+                ))}
+              </>
+            )}
+
+            {/* Common Fields */}
+            <div className="mb-4">
+              <label className="block text-gray-700">Phone</label>
+              <input
+                type="tel"
+                name="phone"
+                value={user.phone}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-4 py-2"
+              />
+            </div>
+
+            {/* Country Dropdown */}
+            <div className="mb-4">
+              <label className="block text-gray-700">Country *</label>
+              <Select
+                options={countryOptions}
+                value={countryOptions.find((option) => option.label === user.country)}
+                onChange={handleCountryChange}
+                className="w-full border rounded-lg px-4 py-2"
+                placeholder="Select your country"
+                isClearable={true}
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-gray-700">City *</label>
+              <input
+                type="text"
+                name="city"
+                value={user.city}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-4 py-2"
+                required
+              />
+            </div>
+
+            {/* Password */}
+            <div className="mb-4">
+              <label className="block text-gray-700">Password *</label>
+              <input
+                type="password"
+                name="password"
+                value={user.password}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-4 py-2"
+                required
+              />
+            </div>
+
+            {/* Confirm Password */}
+            <div className="mb-4">
+              <label className="block text-gray-700">Confirm Password *</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={user.confirmPassword}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-4 py-2"
+                required
+              />
+            </div>
+
+            {/* Accept Terms of Service and Privacy Policy */}
+            <div className="mb-4">
+              <p>
+                By registering you accept our{" "}
+                <Link to="/terms-of-service" className="text-blue-600 hover:underline">
+                  Terms of Service
+                </Link>{" "}
+                and{" "}
+                <Link to="/privacy-policy" className="text-blue-600 hover:underline">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+            </div>
+
+            {/* Submit Button */}
+            <Button type="submit" variant="primary" className="w-full" disabled={loading}>
+              {loading ? "Registering..." : "Register"}
+            </Button>
+          </form>
+
+          {error && (
+            <div className="text-red-600 text-sm mt-4" role="alert">
+              {error}
+            </div>
+          )}
+
+          <div className="text-center mt-2">
+            <p className="text-sm text-gray-500">
+              Already have an account?{" "}
+              <Link to="/login" className="text-blue-600 hover:underline">
+                Login
+              </Link>
+              .
+            </p>
           </div>
-        )}
-
-        <div className="text-center mt-2">
-          <p className="text-sm text-gray-500">
-            Already have an account?{" "}
-            <Link to="/login" className="text-blue-600 hover:underline">
-              Login
-            </Link>
-            .
-          </p>
         </div>
       </div>
     </div>
