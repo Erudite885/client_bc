@@ -544,7 +544,7 @@ function Register() {
             </div>
 
             {/* Accept Terms of Service and Privacy Policy */}
-            <div className="mb-4">
+            <div className="mb-4 text-xs">
               <p>
                 By registering you accept our{" "}
                 <Link to="/terms-of-service" className="text-blue-600 hover:underline">
