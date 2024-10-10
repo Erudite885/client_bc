@@ -2,7 +2,7 @@ import "./app.scss";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import React from "react";
 import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/footer/Footer";
+
 import Home from "./pages/home/Home";
 import Gigs from "./pages/gigs/Gigs";
 import Gig from "./pages/gig/Gig";
@@ -31,6 +31,8 @@ import ResendEmailVerification from "./pages/auth/ResendEmailVerification";
 import EmailSent from "./pages/auth/EmailSent";
 import ResetPassword from "./pages/auth/ResetPassword";
 import Pricing from "./pages/common/Pricing";
+import Dashboard from "./pages/dashboard/Dashboad";
+import { Onboarding } from "./pages/common/Onboarding";
 
 function App() {
   const queryClient = new QueryClient();
@@ -65,6 +67,14 @@ function App() {
         {
           path: "/about",
           element: <About />,
+        },
+        {
+          path: "/onboarding",
+          element: <Onboarding />,
+        },
+        {
+          path: "/dashboard",
+          element: <Dashboard />,
         },
         {
           path: "/privacy-policy",

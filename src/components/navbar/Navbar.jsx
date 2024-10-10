@@ -2,48 +2,31 @@ import React, { useState } from "react";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import brandlogo from "../../assets/brandlogo.svg";
-import brandlogo_active from "../../assets/brandlogo_preview.png";
 import { Button } from "../Button/Button";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 function Navbar() {
-  const [active, setActive] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  const navigate = useNavigate();
+  // Fetch current user from localStorage
+  const currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
   const location = useLocation(); // Get the current location
-
-  const handleLogout = async () => {
-    try {
-      await newRequest.post("/auth/logout");
-      localStorage.removeItem("currentUser");
-      navigate("/");
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   // List of paths where the navbar should be hidden
   const hiddenPaths = ["/login", "/register"];
 
-  // Conditionally hide the navbar if the current path is in the hiddenPaths array
-  if (hiddenPaths.includes(location.pathname)) {
+  // Conditionally hide the navbar if the user is logged in or if the current path is in the hiddenPaths array
+  if (currentUser || hiddenPaths.includes(location.pathname)) {
     return null;
   }
 
   return (
-    <nav className={`w-full bg-white shadow-md fixed top-0 left-0 z-50 transition-all ${active ? "py-2" : "py-4"}`}>
+    <nav className="w-full bg-white shadow-md fixed top-0 left-0 z-50 transition-all py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         {/* Brand Logo */}
         <div className="flex-shrink-0">
           <Link to="/" className="flex items-center">
-            <img
-              src={brandlogo}
-              style={{ filter: "brightness(0.6)" }} // Adjust brightness value as needed
-              className="h-8 w-auto"
-              alt="BrandCollaborator Logo"
-            />
+            <img src={brandlogo} className="h-8 w-auto filter brightness-75" alt="BrandCollaborator Logo" />
           </Link>
         </div>
 
@@ -92,6 +75,7 @@ function Navbar() {
             onClick={() => setMenuOpen(!menuOpen)}
             className="text-gray-700 hover:text-blue-600 focus:outline-none"
             aria-label={menuOpen ? "Close Menu" : "Open Menu"}
+            aria-expanded={menuOpen ? "true" : "false"}
           >
             {menuOpen ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
           </button>

@@ -69,7 +69,11 @@ function Login() {
 
     try {
       const res = await newRequest.post("/auth/login", { email, password });
-      localStorage.setItem("currentUser", JSON.stringify(res.data));
+      // localStorage.setItem("currentUser", JSON.stringify(res.data.user));
+
+      // Store token and user data in localStorage
+      localStorage.setItem("accessToken", res.data.token); // Assuming the token is in res.data.token
+      localStorage.setItem("currentUser", JSON.stringify(res.data.user));
 
       if (rememberMe) {
         localStorage.setItem("savedEmail", email);
@@ -78,6 +82,14 @@ function Login() {
       }
 
       navigate("/edit-profile");
+      if (user.isFirstTimeLogin) {
+        // Navigate to the onboarding page
+        navigate("/onboarding");
+      } else {
+        // Navigate to the main dashboard or homepage
+        navigate("/dashboard");
+      }
+      
     } catch (err) {
       setError(err.response?.data || "Something went wrong");
     } finally {
