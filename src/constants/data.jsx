@@ -452,4 +452,48 @@ export const faqs = [
       { src: image3, alt: "Image 10", className: "w-full h-auto" },
       { src: image1, alt: "Image 11", className: "w-full h-auto" },
       { src: image2, alt: "Image 12", className: "w-full h-auto" },
-    ];
+  ];
+    
+  // src/data/menuItems.js
+// import {
+//   HomeIcon,
+//   UsersIcon,
+//   CurrencyDollarIcon,
+//   ClipboardListIcon,
+//   BriefcaseIcon,
+//   DocumentReportIcon,
+//   UserGroupIcon,
+//   ChatIcon,
+// } from '@heroicons/react/outline';
+// import { Roles } from '../constants/roles';
+
+// export const dashboardMenuItems = {
+//   [Roles.ADMIN]: [
+//     { name: 'Overview', icon: HomeIcon, href: '#overview' },
+//     { name: 'Users', icon: UsersIcon, href: '#users' },
+//     { name: 'Metrics', icon: ClipboardListIcon, href: '#metrics' },
+//     { name: 'Payments', icon: CurrencyDollarIcon, href: '#payments' },
+//     { name: 'Reports', icon: DocumentReportIcon, href: '#reports' },
+//   ],
+//   [Roles.FREELANCER]: [
+//     { name: 'My Gigs', icon: BriefcaseIcon, href: '#my-gigs' },
+//     { name: 'Bookings', icon: ClipboardListIcon, href: '#bookings' },
+//     { name: 'Earnings', icon: CurrencyDollarIcon, href: '#earnings' },
+//     { name: 'Messages', icon: ChatIcon, href: '#messages' },
+//     { name: 'Profile', icon: UserGroupIcon, href: '#profile' },
+//   ],
+//   [Roles.CONTENT_CREATOR]: [
+//     { name: 'New Projects', icon: BriefcaseIcon, href: '#new-projects' },
+//     { name: 'In Progress', icon: ClipboardListIcon, href: '#in-progress' },
+//     { name: 'Earnings', icon: CurrencyDollarIcon, href: '#earnings' },
+//     { name: 'Messages', icon: ChatIcon, href: '#messages' },
+//     { name: 'Profile', icon: UserGroupIcon, href: '#profile' },
+//   ],
+//   [Roles.BRAND]: [
+//     { name: 'New Projects', icon: BriefcaseIcon, href: '#new-projects' },
+//     { name: 'My Bookings', icon: ClipboardListIcon, href: '#my-bookings' },
+//     { name: 'Hire Talent', icon: UsersIcon, href: '#hire-talent' },
+//     { name: 'Payments', icon: CurrencyDollarIcon, href: '#payments' },
+//     { name: 'Reviews', icon: DocumentReportIcon, href: '#reviews' },
+//   ],
+// };
