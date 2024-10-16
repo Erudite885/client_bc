@@ -39,8 +39,9 @@ export const ProfileEdit = () => {
       setProfileImagePreview(currentUser.profileImage || "");
     } else {
       setError("You are not authenticated!");
+      navigate("/login");
     }
-  }, []);
+  }, [navigate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -108,7 +109,7 @@ export const ProfileEdit = () => {
 
       localStorage.setItem("currentUser", JSON.stringify(res.data));
       setProfileImagePreview(res.data.profileImage || "");
-      navigate("/dashboard")
+      navigate("/dashboard");
     } catch (err) {
       setLoading(false);
       console.error("Update Error:", err);
@@ -159,6 +160,7 @@ export const ProfileEdit = () => {
               id="username"
               value={user.username}
               onChange={handleInputChange}
+              disabled
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               required
             />
@@ -191,6 +193,7 @@ export const ProfileEdit = () => {
               id="email"
               value={user.email}
               onChange={handleInputChange}
+              disabled
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               required
             />
@@ -255,7 +258,7 @@ export const ProfileEdit = () => {
               } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
               disabled={loading}
             >
-              {loading ? "Updating..." : "Update Profile"}
+              {loading ? "Updating..." : "Update Details"}
             </button>
           </div>
 
