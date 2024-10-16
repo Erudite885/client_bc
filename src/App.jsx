@@ -1,6 +1,10 @@
 import "./app.scss";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import React from "react";
+
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'; // Import react-toastify CSS
+
 import Navbar from "./components/navbar/Navbar";
 
 import Home from "./pages/home/Home";
@@ -43,7 +47,8 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <Navbar />
           <Outlet />
-          
+          {/* Add ToastContainer here */}
+          <ToastContainer position="top-right" autoClose={3000} />
         </QueryClientProvider>
       </div>
     );
@@ -133,7 +138,7 @@ function App() {
           element: <Add />,
         },
         {
-          path: "/gig/:id",
+          path: "/gigs/:id",
           element: <Gig />,
         },
         {
@@ -168,10 +173,10 @@ function App() {
           path: "/resend-verification",
           element: <ResendEmailVerification />,
         },
-        // {
-        //   path: "/pay/:id",
-        //   element: <Pay />,
-        // },
+        {
+          path: "/pay/:id",
+          element: <Pay />,
+        },
         // {
         //   path: "/success",
         //   element: <Success />,
