@@ -18,10 +18,11 @@ const Pay = () => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        const res = await newRequest.post(
-          `/orders/create-payment-intent/${id}`
-        );
-        setClientSecret(res.data.clientSecret);
+        // const res = await newRequest.post(
+        //   `/orders/create-payment-intent/${id}`
+        // );
+        // setClientSecret(res.data.clientSecret);
+        console.log("payment request")
       } catch (err) {
         console.log(err);
       }
