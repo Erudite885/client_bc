@@ -1,34 +1,12 @@
-import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import newRequest from "../../utils/newRequest";
+import React from "react";
 
-const Success = () => {
-  const { search } = useLocation();
-  const navigate = useNavigate();
-  const params = new URLSearchParams(search);
-  const payment_intent = params.get("payment_intent");
-
-  useEffect(() => {
-    const makeRequest = async () => {
-      try {
-        await newRequest.put("/orders", { payment_intent });
-        setTimeout(() => {
-          navigate("/orders");
-        }, 5000);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    makeRequest();
-  }, []);
-
+function OrderSuccess() {
   return (
-    <div>
-      Payment successful. You are being redirected to the orders page. Please do
-      not close the page
+    <div className="container mx-auto p-8">
+      <h1 className="text-4xl font-bold text-green-600">Payment Successful!</h1>
+      <p className="mt-4 text-gray-700">Thank you for your purchase. Your order has been placed successfully.</p>
     </div>
   );
-};
+}
 
-export default Success;
+export default OrderSuccess;
