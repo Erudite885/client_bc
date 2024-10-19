@@ -35,7 +35,7 @@ export const Onboarding = () => {
 
         {/* Welcome Message */}
         <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-6">
-          Welcome's <span className="capitalize">{currentUser.username}</span>!
+          Welcome <span className="capitalize">{currentUser.username}</span>!
         </h1>
 
         {/* Introduction */}
