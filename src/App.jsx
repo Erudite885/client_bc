@@ -1,12 +1,12 @@
 import "./app.scss";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import React from "react";
 
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'; // Import react-toastify CSS
 
 import Navbar from "./components/navbar/Navbar";
-
 import Home from "./pages/home/Home";
 import Gigs from "./pages/gigs/Gigs";
 import Gig from "./pages/gig/Gig";
@@ -19,9 +19,7 @@ import Orders from "./pages/orders/Orders";
 import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
 import MyGigs from "./pages/myGigs/MyGigs";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Pay from "./pages/pay/Pay";
-import Success from "./pages/success/Success";
+
 import { PrivacyPolicy } from "./pages/common/PrivacyPolicy";
 import { FAQ } from "./pages/common/FAQ";
 import { TermsOfService } from "./pages/common/TermsOfService";
@@ -37,6 +35,11 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import Pricing from "./pages/common/Pricing";
 import Dashboard from "./pages/dashboard/Dashboad";
 import { Onboarding } from "./pages/common/Onboarding";
+import PaymentConfirmation from "./pages/pay/PaymentConfirmation";
+import Checkout from "./pages/checkout/Checkout";
+import OrderSuccess from "./pages/success/Success";
+import PaymentCompleted from "./pages/complete/complete";
+import OrderFailure from "./pages/success/Failed";
 
 function App() {
   const queryClient = new QueryClient();
@@ -174,13 +177,25 @@ function App() {
           element: <ResendEmailVerification />,
         },
         {
-          path: "/pay/:id",
-          element: <Pay />,
+          path: "/payment-confirmation/:gigId",
+          element: <PaymentConfirmation />,
         },
-        // {
-        //   path: "/success",
-        //   element: <Success />,
-        // },
+        {
+          path: "/checkout/:gigId",
+          element: <Checkout />,
+        },
+        {
+          path: "/payment-completed",
+          element: <PaymentCompleted />,
+        },
+        {
+          path: "/order-success",
+          element: <OrderSuccess />,
+        },
+        {
+          path: "/order-failure",
+          element: <OrderFailure />,
+        },
       ],
     },
   ]);
