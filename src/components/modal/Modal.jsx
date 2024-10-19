@@ -1,6 +1,17 @@
+// src/components/Modal.jsx
+
 import React from "react";
 
-const Modal = ({ isOpen, title, body, onClose, onConfirm, confirmText = "Confirm", cancelText = "Cancel" }) => {
+const Modal = ({
+  isOpen,
+  title,
+  body,
+  onClose,
+  onConfirm,
+  confirmText = "Confirm",
+  cancelText = "Cancel",
+  confirmButtonClass = "bg-red-500 text-white hover:bg-red-600", // New prop with default value
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -10,7 +21,7 @@ const Modal = ({ isOpen, title, body, onClose, onConfirm, confirmText = "Confirm
         <h2 className="text-xl font-semibold mb-4">{title}</h2>
 
         {/* Body */}
-        <p>{body}</p>
+        {body && <p>{body}</p>}
 
         <div className="mt-6 flex justify-end gap-3">
           {/* Cancel Button */}
@@ -19,7 +30,7 @@ const Modal = ({ isOpen, title, body, onClose, onConfirm, confirmText = "Confirm
           </button>
 
           {/* Confirm Button */}
-          <button className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={onConfirm}>
+          <button className={`px-4 py-2 ${confirmButtonClass} rounded-md`} onClick={onConfirm}>
             {confirmText}
           </button>
         </div>
