@@ -16,7 +16,7 @@ const MyGigs = () => {
   // Fetching gigs created by the current user
   const { isLoading, error, data } = useQuery({
     queryKey: ["myGigs"],
-    queryFn: () => newRequest.get(`/gigs?userId=${currentUser._id}`).then((res) => res.data),
+    queryFn: () => newRequest.get(`/gigs/mygigs`).then((res) => res.data),
   });
 
   // Mutation to delete a gig
@@ -104,7 +104,7 @@ const MyGigs = () => {
                             to={`/gigs/${gig._id}`}
                             className="text-fuchsia-500 hover:text-fuchsia-700 transition"
                           >
-                            Edit
+                            View
                           </Link>
                           <button
                             onClick={() => handleDeleteClick(gig._id)} // Open the modal
